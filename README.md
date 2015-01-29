@@ -3,13 +3,14 @@ Command line interface for Rudder API
 
 Clients and libraries to call rudder
 
-Synopsys
+Synopsis
 --------
 
     rudder-cli nodes list --skip-verify
     rudder-cli group list --skip-verify
     rudder-cli group show 9a07de69-6c52-4f54-9525-06acd6d0edc4
     rudder-cli api GET /api/nodes
+    rudder-cli node list_pending | jq '.nodes[0]'
 
 
 Installation
@@ -42,7 +43,7 @@ It is a good idea to put all your default arguments in a configuration file in ~
 Documentation
 -------------
 
-Use either rudder-cli --help or rudder-cli <something> --help to get details on command line arguments.
+Use either rudder-cli --help or rudder-cli \<something> --help to get details on command line arguments.
 
     A CLI interface the Rudder Web API.
 
@@ -71,10 +72,21 @@ Use either rudder-cli --help or rudder-cli <something> --help to get details on 
 
 
 
+Since we are talking about manipulating json in command line, I warmly recommend you to take a look at jq http://stedolan.github.io/jq/
+For example, to get the first pending node:
+
+    rudder-cli node list_pending | jq '.nodes[0]'
+
+To get the hostname of all pending nodes:
+
+    rudder-cli node list_pending | jq '.nodes[].hostname'
+
+
+
 Python library for Rudder API
 =============================
 
-Synopsys
+Synopsis
 --------
 
     from rudder import RudderEndPoint

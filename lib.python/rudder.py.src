@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import json, requests
-import pprint
 import urllib3
+from pprint import pprint
 
 # exceptions to catch : ConnectionError HTTPError Timeout TooManyRedirects 
 #    or RequestException that encompass all of the above
@@ -42,6 +42,7 @@ class RudderEndPoint:
  
   # Exceptions can be raised here !
   def request(self, method, api_url, change_info=None, data=None, json_data=None, return_raw=False):
+    global RUDDER_DEBUG_QUERY
     # request tuning for Rudder server
     url = self.endpoint_url + api_url
     if type(change_info) is str:
@@ -52,6 +53,9 @@ class RudderEndPoint:
     # Manage json here, because request on centos 6 doesn't support it
     if data is not None:
       json_data = json.dumps(data)
+
+    # usefull for debug
+    self.debug_query = json_data
 
     # Do the call here
     self._res = self.session.request(method, url, params=change_info,
@@ -76,7 +80,8 @@ class RudderEndPoint:
       return self._res.text
     # return only useful data, based on request type
     if method == "PUT" or method == "POST":
-      return status['id']
+      if 'id' in status:
+        return status['id']
     return status['data']
 
 

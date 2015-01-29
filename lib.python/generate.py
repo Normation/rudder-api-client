@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+# 
+# WARNING: Make changes wisely,     most of the change you do here have an impact on existing libraries publicly used
+#          Make changes in cli too, most of the change you do here have an impact on rudder-cli
+#
+
 import json
 import re
 import pprint

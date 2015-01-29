@@ -20,6 +20,7 @@ Options:
  --cr-name=<name>         Change Request name (default defined in Rudder)
  --cr-description=<text>  Change Request description
  -j --json=<file>         Add a json input (can be used instead of optional parameters, defaults to stdin for direct api call)
+ -d --debug               Dump data sent to the server
 
 """
 
@@ -41,7 +42,8 @@ functions = {
                 'list_pending': 'list_pending_nodes',
                 'show': 'accepted_node_details',
                 'delete': 'delete_node',
-                'update_status': 'change_node_status',
+                'accept': [ 'change_node_status', { 'status': 'accepted' } ],
+                'refuse': [ 'change_node_status', { 'status': 'refused' } ],
                 'update_properties': 'update_node_properties',
             },
         'groups' : {
@@ -58,7 +60,7 @@ functions = {
                 'show': 'rule_details',
                 'create': 'create_rule',
                 'clone': 'clone_rule',
-                'delete': 'clone_rule',
+                'delete': 'delete_rule',
                 'update': 'update_rule',
             },
         'directives': {
@@ -163,9 +165,8 @@ def get_api_method(endpoint, obj, command):
   if obj in functions:
     if command in functions[obj]:
       method_name = functions[obj][command]
-  if method_name is None:
-    print("I don't know what to do ")
-    exit(3)
+      if isinstance(method_name, list):
+        method_name = method_name[0]
   try:
     return getattr(endpoint, method_name)
   except AttributeError:
@@ -205,11 +206,18 @@ def update_doc(doc, objname=None):
   if objname is None:
     subdoc += "  rudder-cli api <method> <api_url> [options]\n"
     for objname in functions:
-        subdoc += "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) [<args>...] [options]\n"
+        subdoc += "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) <args>... [options]\n"
   else:
     for command in functions[objname]:
       method = get_api_method(RudderEndPoint, objname, command)
       (mandatory, optional) = get_api_parameters(method)
+      method_content = functions[objname][command]
+      if isinstance(method_content, list):
+        for p in method_content[1]:
+          if '<' + p + '>' in mandatory:
+            mandatory.remove('<' + p + '>')
+          if '--' + p in optional:
+            optional.remove('--' + p)
       parameters = ["["+x+"=<value>]" for x in optional]
       subdoc +=  "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) " + command + " [options] " + " ".join(mandatory) + " " + " ".join(parameters) + "\n"
   return re.sub(r'  rudder-cli <object> <command> \[options\]', subdoc, __doc__)
@@ -231,30 +239,31 @@ if __name__ == "__main__":
   args = docopt(update_doc(__doc__), argv=sys.argv[1:], options_first=True)
   clean_params(args)
   if 'api' in args:
-    arguments = docopt(update_doc(__doc__), argv=sys.argv[1:])
+    args2 = docopt(update_doc(__doc__), argv=sys.argv[1:])
   else:
     # subcommand options
     objname = get_objname(args)
     argv = [ objname ] + args['<args>']
-    arguments = docopt(update_doc(__doc__, objname), argv=argv)
-  clean_params(arguments)
+    args2 = docopt(update_doc(__doc__, objname), argv=argv)
+  clean_params(args2)
+  args.update(args2)
 
   # options from configuration file
-  if '--conffile' in arguments:
-    configuration = load_config(arguments['--conffile'])
+  if '--conffile' in args:
+    configuration = load_config(args['--conffile'])
   else:
     configuration = load_config(conf['--conffile'])
 
   # take default proxy from environment (can depend on the url parameter)
-  conf["--proxy"] = get_proxy(configuration, arguments)
+  conf["--proxy"] = get_proxy(configuration, args)
 
   # defaults that depends on arguments
-  if 'api' in arguments:
+  if 'api' in args:
     conf["--raw"] = True
 
-  # configuration overriding : env -> conffile -> arguments
+  # configuration overriding : env -> conffile -> args
   conf.update(configuration)
-  conf.update(arguments)
+  conf.update(args)
 
   # reinterpret some options
   timeout = float(conf["--timeout"])
@@ -279,8 +288,8 @@ if __name__ == "__main__":
     if method != 'get':
       conf['--json'] = '-'
   else:
-    objname = get_objname(arguments)
-    command = get_command(arguments, objname)
+    objname = get_objname(args)
+    command = get_command(args, objname)
     docstring = get_api_method(endpoint, objname, command).__doc__
     match = re.search(r'\((\w+)\)', docstring)
     if match:
@@ -312,7 +321,7 @@ if __name__ == "__main__":
         exit(11)
       with open(conf['--json'], 'r') as fd:
         json_data = fd.read()
-    if re.match("\s*", json_data):
+    if re.match("^\s*$", json_data):
       json_data = None
 
   # call API directly
@@ -325,6 +334,8 @@ if __name__ == "__main__":
                              json_data = json_data,
                              return_raw = conf["--raw"])
     except requests.exceptions.RequestException as e:
+      if '--debug' in conf:
+        print(endpoint.debug_query)
       print("Error in calling " + conf["<api_url>"])
       pprint(e)
       pprint(e.response.text)
@@ -335,16 +346,18 @@ if __name__ == "__main__":
   else:
     # prepare parameters
     kwargs = { "return_raw": conf["--raw"] }
+    method_content = functions[objname][command]
+    if isinstance(method_content, list):
+      kwargs.update(method_content[1])
     function = get_api_method(endpoint, objname, command)
-    #params = function.func_code.co_varnames[:function.func_code.co_argcount][1:-1]
     params = inspect.getargspec(function).args[1:-1]
     for param in params:
       p = '--' + param
-      if '<'+param+'>' in arguments:
-        kwargs[param] = arguments['<'+param+'>']
-      elif p in arguments:
-        if arguments[p] is not False:
-          kwargs[param] = arguments[p]
+      if '<'+param+'>' in args:
+        kwargs[param] = args['<'+param+'>']
+      elif p in args:
+        if args[p] is not False:
+          kwargs[param] = args[p]
     if change_info is not None:
       kwargs['change_info'] = change_info
     if json_data is not None:
@@ -355,15 +368,22 @@ if __name__ == "__main__":
       res = function(**kwargs)
     except TypeError as e:
       print("Wrong parameter used in: " + function.__name__)
+      raise
       exit(4)
     except requests.exceptions.SSLError as e:
       print("SSL verification failed, try with --skip-verify")
       exit(10)
     except requests.exceptions.RequestException as e:
+      if '--debug' in conf:
+        print(endpoint.debug_query)
       print("Error in calling " + function.__name__)
       pprint(e)
       pprint(e.response.text)
       exit(10)
+
+  # display debug data
+  if '--debug' in conf:
+    print(endpoint.debug_query)
 
   # display results
   if conf["--raw"]:

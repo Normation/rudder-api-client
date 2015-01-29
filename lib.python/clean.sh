@@ -1,3 +1,3 @@
 #!/bin/bash
 
-rm -f rudder.py rudder.pyc 
+rm -rf rudder.py rudder.pyc __pycache__
