@@ -1,0 +1,1503 @@
+[
+  {
+    "type": "post",
+    "url": "/api/changeRequests/{id}/accept",
+    "title": "4. Accept a Change Request",
+    "version": "3.0.0",
+    "name": "acceptChangeRequest",
+    "group": "Change_Requests",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "WorkflowStatus",
+            "optional": false,
+            "field": "status",
+            "description": "<p>Final status in which the change Request will be after acceptance.</p> <pre><code>&lt;div&gt;&lt;span class=&quot;values&quot;&gt;Possible values: &lt;/span&gt;&lt;ul class=&quot;values&quot;&gt;&lt;li&gt;pending deployment&lt;/li&gt;&lt;li&gt;deployed&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;br style=&quot;clear:both&quot;/&gt; </code></pre>"
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Change Request.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    // Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/changeRequests/42/accept -d \"status=deployed\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"action\":\"acceptChangeRequest\",\n  \"id\" : 42\n  \"result\":\"success\",\n  \"data\":{\n    \"changeRequests\":[{\n      \"id\":42,\n      \"name\":\"Remove unused security policy\",\n      \"description\":\"\",\n      \"status\":\"Deployed\",\n      \"isAcceptable\":true,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"delete Rule\"\n          \"rule\":{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"security policy\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n    }]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/ChangeRequest.md",
+    "groupTitle": "Change_Requests"
+  },
+  {
+    "type": "get",
+    "url": "/api/changeRequests/{id}",
+    "title": "2. Get a Change Request details",
+    "version": "3.0.0",
+    "name": "changeRequestDetails",
+    "group": "Change_Requests",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/changeRequests/42",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"action\":\"changeRequestDetails\",\n  \"id\" : 42\n  \"result\":\"success\",\n  \"data\":{\n    \"changeRequests\":[{\n      \"id\":42,\n      \"name\":\"Remove unused security policy\",\n      \"description\":\"\",\n      \"status\":\"Pending validation\",\n      \"isAcceptable\":true,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"delete Rule\"\n          \"rule\":{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"security policy\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n    }]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/ChangeRequest.md",
+    "groupTitle": "Change_Requests",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Change Request.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/changeRequests/{id}",
+    "title": "3. Decline a Change Request",
+    "version": "3.0.0",
+    "name": "declineChangeRequest",
+    "group": "Change_Requests",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/changeRequests/42",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"action\":\"declineChangeRequest\",\n  \"id\" : 42\n  \"result\":\"success\",\n  \"data\":{\n    \"changeRequests\":[{\n      \"id\":42,\n      \"name\":\"Remove unused security policy\",\n      \"description\":\"\",\n      \"status\":\"Cancelled\",\n      \"isAcceptable\":true,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"delete Rule\"\n          \"rule\":{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"security policy\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n    }]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/ChangeRequest.md",
+    "groupTitle": "Change_Requests",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Change Request.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/changeRequests",
+    "title": "1. List all Changes Requests",
+    "version": "3.0.0",
+    "name": "listChangeRequests",
+    "group": "Change_Requests",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "WorkflowStatus",
+            "optional": true,
+            "field": "status",
+            "defaultValue": "open",
+            "description": "<p>The status of change requests you want to display.</p> <pre><code>&lt;div&gt;&lt;span class=&quot;values&quot;&gt;Possible values: &lt;/span&gt;&lt;ul class=&quot;values&quot;&gt;&lt;li&gt;pending validation&lt;/li&gt;&lt;li&gt;pending deployment&lt;/li&gt;&lt;li&gt;cancelled&lt;/li&gt;&lt;li&gt;deployed&lt;/li&gt;&lt;li&gt;open (pending validation + pending deployment)&lt;/li&gt;&lt;li&gt;closed (cancelled + deployed)&lt;/li&gt;&lt;li&gt;all&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;br style=&quot;clear:both&quot;/&gt; </code></pre>"
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/changeRequests -d \"status=open\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    {\n  \"action\":\"listChangeRequests\",\n  \"result\":\"success\",\n  \"data\":{\n    \"changeRequests\":[{\n      \"id\":42,\n      \"name\":\"Remove unused security policy\",\n      \"description\":\"\",\n      \"status\":\"Pending validation\",\n      \"isAcceptable\":true,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"delete Rule\"\n          \"rule\":{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"Security Policy\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n    },{\n      \"id\":45,\n      \"name\":\"Add new package policy for Redhat nodes\",\n      \"description\":\"\",\n      \"status\":\"Pending deployment\",\n      \"isAcceptable\":false,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"modify Rule\"\n          \"rule\":{\n            \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n            \"displayName\":\"Redhat node configuration\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\": {\n              \"from\" : [\"cba93d24-8780-4308-b732-84995125562a\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n              \"to\" : [\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            }\n            \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n\n    }]\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/ChangeRequest.md",
+    "groupTitle": "Change_Requests"
+  },
+  {
+    "type": "post",
+    "url": "/api/changeRequests/{id}",
+    "title": "5. Update a Change Request",
+    "version": "3.0.0",
+    "name": "updateChangeRequest",
+    "group": "Change_Requests",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "name",
+            "description": "<p>Name the Change Request.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Change Request.</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Change Request.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    // Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/changeRequests/42  -d \"name=new Name of Change Request\" -d \"description=add a new description\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"action\":\"updateChangeRequest\",\n  \"id\" : 42\n  \"result\":\"success\",\n  \"data\":{\n    \"changeRequests\":[{\n      \"id\":42,\n      \"name\":\"new Name of Change Request\",\n      \"description\":\"add a new description\",\n      \"status\":\"Pending validation\",\n      \"isAcceptable\":true,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"delete Rule\"\n          \"rule\":{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"security policy\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n    }]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/ChangeRequest.md",
+    "groupTitle": "Change_Requests"
+  },
+  {
+    "type": "put",
+    "url": "/api/directives",
+    "title": "6. Clone a Directive",
+    "version": "2.0.0",
+    "name": "cloneDirective",
+    "group": "Directives",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": false,
+            "field": "source",
+            "description": "<p>The id of the Directive the clone will be based onto. missing source will</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "displayName",
+            "description": "<p>The name of the Directive to create, this parameter is mandatory</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "JSON",
+            "optional": true,
+            "field": "parameters",
+            "description": "<p>The full list of parameters. This parameter can be empty, but the Directive will not be applied.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "shortescription",
+            "description": "<p>Short description of the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "longDescription",
+            "description": "<p>Long description of the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": true,
+            "field": "id",
+            "defaultValue": "autoGenerated",
+            "description": "<p>Define the id of the Directive to create, Rudder will generate an id if this is missing. You should only use it for specific use case</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "defaultValue": "true",
+            "description": "<p>Enable the Directive at creation. But this parameter can be overriden.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Int",
+            "optional": true,
+            "field": "priority",
+            "defaultValue": "5",
+            "description": "<p>Directive priority. Determine which value to use if there is Directives based on the same technique applied to a Node</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "TechniqueVersion",
+            "optional": true,
+            "field": "techniqueVersion",
+            "defaultValue": "same",
+            "description": "<p>version as source] Define the technique version used. By default it will used the version of the cloned Directive</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"source=DirectiveIDSource\" -d \"displayName=Name of New Directive”",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/directive.md",
+    "groupTitle": "Directives"
+  },
+  {
+    "type": "put",
+    "url": "/api/directives",
+    "title": "3. Create a new Directive",
+    "version": "2.0.0",
+    "name": "createDirective",
+    "group": "Directives",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "TechniqueName",
+            "optional": false,
+            "field": "techniqueName",
+            "description": "<p>The name of the technique you want to use to create your Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "displayName",
+            "description": "<p>The name of the Directive to create.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "JSON",
+            "optional": true,
+            "field": "parameters",
+            "description": "<p>The full list of parameters. This parameter can be empty, but the Directive will not be applied.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "shortDescription",
+            "description": "<p>Short description of the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "longDescription",
+            "description": "<p>Long description of the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": true,
+            "field": "id",
+            "defaultValue": "autoGenerated",
+            "description": "<p>Define the id of the Directive to create, Rudder will generate an id if this is missing. You should only use it for specific use case.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "defaultValue": "true",
+            "description": "<p>Enable the Directive at creation. This parameter can be overriden.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "TechniqueVersion",
+            "optional": true,
+            "field": "techniqueVersion",
+            "defaultValue": "latest",
+            "description": "<p>Technique version] In which version your tehcnique should be created.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"techniqueName=copyGitFile\" -d \"displayName=Copy a test file from shared folder\" -d @parameters",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "    {\n    \"action\":\"createDirective\",\n    \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n    \"result\":\"success\",\n    \"data\":{\n      \"directives\":[{\n        \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n        \"displayName\":\"Copy a test file from shared folder\",\n        \"shortDescription\":\"\",\n        \"longDescription\":\"\",\n        \"techniqueName\":\"copyGitFile\",\n        \"techniqueVersion\":\"1.3\",\n        \"parameters\":{\n          \"section\":{\n            \"name\":\"sections\",\n            \"sections\":[{\n              \"section\":{\n                \"name\":\"Copy file and PostHook\",\n                \"sections\":[{\n                  \"section\":{\n                    \"name\":\"Copy file\",\n                    \"vars\":[{\n                      \"var\":{\n                        \"name\":\"COPYFILE_COMPARE_METHOD\",\n                        \"value\":\"mtime\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_DESTINATION\",\n                        \"value\":\"/tmp/test2\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_GROUP\",\n                        \"value\":\"root\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_NAME\",\n                        \"value\":\"/tmp/test\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_OWNER\",\n                        \"value\":\"root\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_PERM\",\n                        \"value\":\"000\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_RECURSION\",\n                        \"value\":\"0\"\n                      }\n                    }]\n                  }\n                },{\n                  \"section\":{\n                    \"name\":\"Post-modification hook\",\n                    \"vars\":[{\n                      \"var\":{\n                        \"name\":\"COPYFILE_POST_HOOK_COMMAND\",\n                        \"value\":\"\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_POST_HOOK_RUN\",\n                        \"value\":\"false\"\n                      }\n                    }]\n                  }\n                }]\n              }\n            }]\n          }\n        },\n        \"priority\":5,\n        \"isEnabled\":false,\n        \"isSystem\":false\n      }]\n    }\n  }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/directive.md",
+    "groupTitle": "Directives"
+  },
+  {
+    "type": "delete",
+    "url": "/api/directives/{id}",
+    "title": "5. Delete a Directive",
+    "version": "2.0.0",
+    "name": "deleteDirective",
+    "group": "Directives",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/directives/DirectiveID",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/directive.md",
+    "groupTitle": "Directives",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Directive.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/directives/{id}",
+    "title": "2. Get a Directive details",
+    "version": "2.0.0",
+    "name": "directiveDetails",
+    "group": "Directives",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/directives/DirectiveID",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/directive.md",
+    "groupTitle": "Directives",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Directive.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/directives",
+    "title": "1. List all Directives",
+    "version": "2.0.0",
+    "name": "listDirectives",
+    "group": "Directives",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/directives",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "{\n  \"action\":\"listDirectives\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\":\"3877d1c3-d9e6-43cb-aa9d-40961510a34a\",\n      \"displayName\":\"Copy test file shared folder\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\\n    this is a looooooooooooooooonnnnnnnnnn\\n\\n\\nggggggggggggggggg description !!\\\"\\\"\\\"\\\"\\\"\\\"\\n  \",\n      \"techniqueName\":\"copyGitFile\",\n      \"techniqueVersion\":\"1.3\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"Copy file and PostHook\",\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"Copy file\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_COMPARE_METHOD\",\n                      \"value\":\"mtime\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_DESTINATION\",\n                      \"value\":\"/tmp/test2\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_GROUP\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_NAME\",\n                      \"value\":\"/tmp/test\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_OWNER\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_RECURSION\",\n                      \"value\":\"0\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"isEnabled\":true,\n      \"isSystem\":false\n    },{\n      \"id\":\"e61c0696-172b-46bb-80a9-d6f5ef1d2f85\",\n      \"displayName\":\"test local_copy\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"techniqueName\":\"fileManagement\",\n      \"techniqueVersion\":\"2.0\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"File to manage\",\n              \"vars\":[{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_ACTION\",\n                  \"value\":\"copy\"\n                }\n              },{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_SOURCE\",\n                  \"value\":\"/vagrant/node.sh\"\n                }\n              },{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_SYMLINK_ENFORCE\",\n                  \"value\":\"false\"\n                }\n              }],\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"File\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_PATH\",\n                      \"value\":\"/root/test\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"File cleaning options\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_DAYS\",\n                      \"value\":\"0\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_OPTION\",\n                      \"value\":\"none\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_PATTERN\",\n                      \"value\":\".*\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Permissions\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_CHECK_PERMISSIONS\",\n                      \"value\":\"false\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_GROUP\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_OWNER\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_RECURSIVE\",\n                      \"value\":\"1\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"isEnabled\":true,\n      \"isSystem\":false\n    }]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/directive.md",
+    "groupTitle": "Directives"
+  },
+  {
+    "type": "post",
+    "url": "/api/directives/{id}",
+    "title": "4. Update a Directive",
+    "version": "2.0.0",
+    "name": "updateDirective",
+    "group": "Directives",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "displayName",
+            "description": "<p>Name of the Directive to create.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "shortDescription",
+            "description": "<p>Short description of the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "longDescription",
+            "description": "<p>Long description of the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "JSON",
+            "optional": true,
+            "field": "parameters",
+            "description": "<p>Directive parameters.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "description": "<p>Enable/disable the Directive.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Int",
+            "optional": true,
+            "field": "priority",
+            "description": "<p>Directive priority. Determine which value to use if there is Directives based on the same technique applied to a Node.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "TechniqueVersion",
+            "optional": true,
+            "field": "techniqueVersion",
+            "description": "<p>Technique Version.</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Directive.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    // Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/directives/DirectiveID  -d \"displayName=Name of New Directive\"",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/directive.md",
+    "groupTitle": "Directives"
+  },
+  {
+    "type": "put",
+    "url": "/api/groups",
+    "title": "7. Clone a Group",
+    "version": "2.0.0",
+    "name": "cloneGroup",
+    "group": "Groups",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": false,
+            "field": "source",
+            "description": "<p>The id of the Group the clone will be based onto. if this parameter is missing there will be only a Group creation</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "displayName",
+            "description": "<p>Name of the Group to create.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Group.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "dynamic",
+            "defaultValue": "true",
+            "description": "<p>Determine if the group reload automatically or not.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "JSON",
+            "optional": true,
+            "field": "query",
+            "description": "<p>Query to get Nodes. Empty Query is possible, but this group will not have nodes anymore</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": true,
+            "field": "id",
+            "defaultValue": "autoGenerated",
+            "description": "<p>Define the id of the Group to create, Rudder will generate an id if this is missing. You should only use it for specific use case</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "defaultValue": "true",
+            "description": "<p>Enable/Disable the Group at creation. But this parameter can be overriden.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/groups -d “groups=GroupID”",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups"
+  },
+  {
+    "type": "put",
+    "url": "/api/groups",
+    "title": "3. Create a new Group",
+    "version": "2.0.0",
+    "name": "createGroup",
+    "group": "Groups",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "GroupCategoryID",
+            "optional": false,
+            "field": "nodeGroupCategory",
+            "description": "<p>In which category this nodeGroup should be created in</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "displayName",
+            "description": "<p>Name of the Group to create.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Group.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "dynamic",
+            "defaultValue": "true",
+            "description": "<p>Determine if the group reload automatically or not.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "JSON",
+            "optional": true,
+            "field": "query",
+            "description": "<p>Query to get Nodes. Empty Query is possible, but this group will not have nodes anymore</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": true,
+            "field": "id",
+            "defaultValue": "autoGenerated",
+            "description": "<p>Define the id of the Group to create, Rudder will generate an id if this is missing. You should only use it for specific use case</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "defaultValue": "true",
+            "description": "<p>Enable/Disable the Group at creation. But this parameter can be overriden.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/groups -d @JSON-file-name",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups"
+  },
+  {
+    "type": "delete",
+    "url": "/api/groups/{id}",
+    "title": "6. Delete a Group",
+    "version": "2.0.0",
+    "name": "deleteGroup",
+    "group": "Groups",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/groups/GroupID",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the Group you want</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/groups/{id}",
+    "title": "2. Get Group details",
+    "version": "2.0.0",
+    "name": "groupDetails",
+    "group": "Groups",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/groups/GroupID",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the Group you want</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/groups",
+    "title": "1. List all Groups",
+    "version": "2.0.0",
+    "name": "listGroups",
+    "group": "Groups",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/groups",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups"
+  },
+  {
+    "type": "post",
+    "url": "/api/groups/:id/reload",
+    "title": "5. Reload a Group",
+    "version": "2.0.0",
+    "name": "reloadGroup",
+    "group": "Groups",
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the Group you want</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/groups/{id}",
+    "title": "4. Update a Group",
+    "version": "2.0.0",
+    "name": "updateGroup",
+    "group": "Groups",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "displayName",
+            "description": "<p>Name of the Group.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Group.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "dynamic",
+            "description": "<p>Determine if the group reload automatically or not.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "JSON",
+            "optional": true,
+            "field": "query",
+            "description": "<p>Query to get Nodes. Empty Query is possible, but this group will not have nodes anymore.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "description": "<p>Enable/disable the Group.</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>The id of the Group you want</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/groups/GroupID -d \"displayName=Name of New Group\"",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/group.md",
+    "groupTitle": "Groups"
+  },
+  {
+    "type": "get",
+    "url": "/api/nodes/{id}",
+    "title": "3. Get Node details",
+    "version": "4.0.0",
+    "name": "acceptedNodeDetails",
+    "group": "Nodes",
+    "parameter": {
+      "fields": {
+        "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
+          {
+            "group": "Multi",
+            "type": "String",
+            "optional": true,
+            "field": "include",
+            "defaultValue": "default",
+            "description": "<p>Level of information to include from the node inventory. Some base levels are defined (minimal, default, full). you can add fields you want by adding them to the list, possible values are keys from json answer.</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Node.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/NodeID\\?include=full",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"nodeDetails\",\n  \"id\": \"root\",\n  \"result\": \"success\",\n  \"data\": {\n    \"nodes\": [\n      {\n        \"architectureDescription\": \"x86_64-linux-thread-multi\",\n        \"memories\": [\n          {\n            \"slotNumber\": \"1\",\n            \"description\": \"DIMM (Multi-bit ECC)\"\n          }\n        ],\n        \"ram\": 996,\n        \"accounts\": [\n          \"ftp\",\n          \"postfix\",\n        ],\n        \"managementTechnology\": [\n          {\n            \"name\": \"CFEngine Community\"\n          }\n        ],\n        \"ipAddresses\": [\n          \"127.0.0.1\",\n          \"192.168.170.86\"\n        ],\n        \"fileSystems\": [\n          {\n            \"name\": \"swap\",\n            \"totalSpace\": 2015\n          },\n          {\n            \"name\": \"ext4\",\n            \"freeSpace\": 385,\n            \"totalSpace\": 484,\n            \"mountPoint\": \"/boot\"\n          },\n          {\n            \"name\": \"ext4\",\n            \"freeSpace\": 8477,\n            \"totalSpace\": 13646,\n            \"mountPoint\": \"/\"\n          }\n        ],\n        \"managementTechnologyDetails\": {\n          \"cfengineKeys\": [\n            \"MIIBCAKCAQEAv40NlDNdJjHMSJEzDowgWzHcmq2PSqp8eA+brgWpxaqPq3uRO8JWb/YFFbeVQhMF0AyhwpMA048Jbs0WMp1+E4OShsvEeDJJPX1ohc/mmyxHaeW/SvgQ3YhQksBCMkwZK7Xjh73vsCTSbgJewEbJomhaW7uIt7WJeJW5fge4Nrr17MMQqSXZrzg4Q9BwVwQ4zEGnP3xwBFOoPc6N1q2FkIbv7oO53IfiiCvFhuf6mQPhN6SnFjybJ4SSWjh4tSAnGKN2TGbV8csHbJYOXn+/4EYXTNiYBYu2SC2E/j1hew25HeIs5zUbl3iOu+6PcVugeH9pmRQghekLWWZGXUltMwIBIw==\"\n          ],\n          \"cfengineUser\": \"root\"\n        },\n        \"os\": {\n          \"type\": \"Linux\",\n          \"name\": \"Centos\",\n          \"version\": \"6.5\",\n          \"fullName\": \"CentOS release 6.5 (Final)\",\n          \"kernelVersion\": \"2.6.32-431.20.3.el6.x86_64\"\n        },\n        \"software\": [\n          {\n            \"name\": \"libpciaccess\",\n            \"editor\": \"CentOS\",\n            \"version\": \"0.13.1-2.el6\",\n            \"description\": \"PCI access library\"\n          },\n          {\n            \"name\": \"libXrender\",\n            \"editor\": \"CentOS\",\n            \"version\": \"0.9.7-2.el6\",\n            \"description\": \"X.Org X11 libXrender runtime library\"\n          },\n          {\n            \"name\": \"dbus-libs\",\n            \"editor\": \"CentOS\",\n            \"version\": \"1.2.24-7.el6_3\",\n            \"description\": \"Libraries for accessing D-BUS\"\n          },\n          [...]\n          {\n            \"name\": \"rudder-webapp\",\n            \"editor\": \"Normation\",\n            \"version\": \"2.10.5.release-1.EL.6\",\n            \"description\": \"Configuration management and audit tool - webapp\"\n          },\n          {\n            \"name\": \"rudder-jetty\",\n            \"editor\": \"Normation\",\n            \"version\": \"2.10.5.release-1.EL.6\",\n            \"description\": \"Configuration management and audit tool - Jetty application server\"\n          }\n        ],\n        \"processors\": [\n          {\n            \"name\": \"QEMU Virtual CPU version 1.1.2\",\n            \"core\": 1,\n            \"speed\": 2000,\n            \"cpuid\": \"23 06 00 00 FD FB 8B 07\",\n            \"model\": 2,\n            \"thread\": 1,\n            \"stepping\": 3,\n            \"quantity\": 1,\n            \"familyName\": \"Other\",\n            \"manufacturer\": \"Intel\"\n          }\n        ],\n        \"status\": \"accepted\",\n        \"bios\": [\n          {\n            \"name\": \"Bochs\",\n            \"editor\": \"Bochs\",\n            \"version\": \"Bochs\",\n            \"quantity\": 1,\n            \"releaseDate\": \"2007-01-01 00:00\"\n          }\n        ],\n        \"networkInterfaces\": [\n          {\n            \"name\": \"lo\",\n            \"status\": \"Up\",\n            \"macAddress\": \"00:00:00:00:00:00\",\n            \"ipAddresses\": [\n              \"127.0.0.1\"\n            ]\n          },\n          {\n            \"name\": \"eth0\",\n            \"status\": \"Up\",\n            \"macAddress\": \"52:54:00:1f:e4:16\",\n            \"ipAddresses\": [\n              \"192.168.170.86\"\n            ]\n          }\n        ],\n        \"lastInventoryDate\": \"2014-09-08 00:52\",\n        \"environmentVariables\": {\n          \"_\": \"/opt/rudder/bin/perl\",\n          \"HOSTNAME\": \"my-server-rudder.com\",\n          \"SHLVL\": \"15\",\n          \"LC_ALL\": \"C\",\n          \"DEBIAN_FRONTEND\": \"noninteractive\",\n          \"MAIL\": \"/var/spool/mail/root\",\n          \"HOME\": \"/root\",\n          \"LANG\": \"C\",\n          \"LESSOPEN\": \"|/usr/bin/lesspipe.sh %s\",\n          \"HISTCONTROL\": \"ignoredups\",\n          \"LOGNAME\": \"root\",\n          \"PWD\": \"/var/rudder\",\n          \"SHELL\": \"/bin/sh\",\n          \"USER\": \"root\",\n          \"HISTSIZE\": \"1000\",\n          \"PATH\": \"/opt/rudder/bin/:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/var/rudder/cfengine-community/bin:/var/rudder/cfengine-community/bin:/var/rudder/cfengine-community/bin\",\n          \"G_BROKEN_FILENAMES\": \"1\"\n        },\n        \"storage\": [\n          {\n            \"name\": \"vda\",\n            \"type\": \"disk\",\n            \"quantity\": 1,\n            \"description\": \"Virtual\",\n            \"manufacturer\": \"6900\"\n          }\n        ],\n        \"id\": \"root\",\n        \"processes\": [\n          {\n            \"pid\": 264,\n            \"tty\": \"?\",\n            \"name\": \"[jbd2/dm-0-8]\",\n            \"user\": \"root\",\n            \"started\": \"2014-07-30 1:41\",\n            \"memory\": 0.0,\n            \"cpuUsage\": 0.0,\n            \"virtualMemory\": 0\n          },\n          {\n            \"pid\": 23434,\n            \"tty\": \"?\",\n            \"name\": \"postgres: rudder rudder 127.0.0.1(41648) idle\",\n            \"user\": \"postgres\",\n            \"started\": \"2014-08-19 3:22\",\n            \"memory\": 3.700000047683716,\n            \"cpuUsage\": 0.0,\n            \"virtualMemory\": 237428\n          },\n          [...]\n          {\n            \"pid\": 9,\n            \"tty\": \"?\",\n            \"name\": \"[khelper]\",\n            \"user\": \"root\",\n            \"started\": \"2014-07-30 0:00\",\n            \"memory\": 0.0,\n            \"cpuUsage\": 0.0,\n            \"virtualMemory\": 0\n          },\n          {\n            \"pid\": 265,\n            \"tty\": \"?\",\n            \"name\": \"[ext4-dio-unwrit]\",\n            \"user\": \"root\",\n            \"started\": \"2014-07-30 0:00\",\n            \"memory\": 0.0,\n            \"cpuUsage\": 0.0,\n            \"virtualMemory\": 0\n          }\n        ],\n        \"hostname\": \"my-server-rudder.com\",\n        \"machine\": {\n          \"id\": \"A5D66CFA-F6FB-C7B3-553E-25D69A92ABD5\",\n          \"type\": \"Virtual\",\n          \"provider\": \"qemu\"\n        },\n        \"policyServerId\": \"root\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/node.md",
+    "groupTitle": "Nodes"
+  },
+  {
+    "type": "post",
+    "url": "/api/nodes/pending/{id}",
+    "title": "4. Change pending Node status",
+    "version": "2.0.0",
+    "name": "changeNodeStatus",
+    "group": "Nodes",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "status",
+            "description": "<p>The new status of the node (refused/accepted)</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Node.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X POST https://rudder.example.com/rudder/api/latest/nodes/pending/NodeID -d \"status=accepted\"",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/node.md",
+    "groupTitle": "Nodes"
+  },
+  {
+    "type": "delete",
+    "url": "/api/nodes/{id}",
+    "title": "6. Delete Node",
+    "version": "2.0.0",
+    "name": "deleteNode",
+    "group": "Nodes",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE https://rudder.example.com/rudder/api/latest/nodes/NodeID",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"changePendingNodeStatus\",\n  \"result\": \"success\",\n  \"data\": {\n    \"nodes\": [\n      {\n        \"id\": \"80ade5bf-aed9-4f57-8beb-aaaf3e63ec04\",\n        \"status\": \"deleted\",\n        \"hostname\": \"node6\",\n        \"osName\": \"Ubuntu\",\n        \"osVersion\": \"12.10\",\n        \"machineType\": \"Virtual\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Server Error\n{\n  \"action\": \"changePendingNodeStatus\",\n  \"result\": \"error\",\n  \"errorDetails\": \"Node with ID '80ade5bf-aed9-4f57-8beb-aaaf3e63ec04' was not found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/node.md",
+    "groupTitle": "Nodes",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Node.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/nodes",
+    "title": "1. List accepted Nodes",
+    "version": "2.0.0",
+    "name": "listAcceptedNodes",
+    "group": "Nodes",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"listAcceptedNodes\",\n  \"result\": \"success\",\n  \"data\": {\n    \"nodes\": [\n      {\n        \"id\": \"f5ebcc89-fd10-4d0d-8e58-58f4634a99b9\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node2.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"d22d59ce-ce56-4e61-913c-2643681289d3\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node4.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"d348e50e-07a9-4475-b798-3dadc1b01b14\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node3.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"18e56738-f390-470a-a048-81833ff50dda\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node5\",\n        \"osName\": \"Debian\",\n        \"osVersion\": \"7.0\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"root\",\n        \"status\": \"accepted\",\n        \"hostname\": \"server\",\n        \"osName\": \"Debian\",\n        \"osVersion\": \"7.0\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"332c238d-65aa-4b4b-bd1b-a89749693f61\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node1.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/node.md",
+    "groupTitle": "Nodes"
+  },
+  {
+    "type": "get",
+    "url": "/api/nodes/pending",
+    "title": "2. List pending Nodes",
+    "version": "2.0.0",
+    "name": "listPendingNodes",
+    "group": "Nodes",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/pending",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"listPendingNodes\",\n  \"result\": \"success\",\n  \"data\": {\n    \"nodes\": [\n      {\n        \"id\": \"7b13f54f-7ab6-4a45-ada7-9049039b87ca\",\n        \"status\": \"pending\",\n        \"hostname\": \"node5\",\n        \"osName\": \"Debian\"\n      },\n      {\n        \"id\": \"80ade5bf-aed9-4f57-8beb-aaaf3e63ec04\",\n        \"status\": \"pending\",\n        \"hostname\": \"node6\",\n        \"osName\": \"Ubuntu\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/node.md",
+    "groupTitle": "Nodes"
+  },
+  {
+    "type": "post",
+    "url": "/api/nodes/{id}",
+    "title": "5. Set Node properties",
+    "version": "5.0.0",
+    "name": "updateNodeProperties",
+    "group": "Nodes",
+    "description": "<p>This API allows to set &quot;key=value&quot; properties in node. This properties are then returned in the node details under the &quot;properties&quot; key, and they can be used to define group.     Value are non-empty UTF-8 strings. Setting a key to the empty string removes it from the list of properties for that node.</p> ",
+    "examples": [
+      {
+        "title": "Given the \"properties.json\" JSON file with content:",
+        "content": "{ \"properties\": [\n  { \"name\": \"env_type\"    , \"value\": \"production\" },\n  { \"name\": \"shell\"       , \"value\": \"/bin/sh\" },\n  { \"name\": \"utf-8 poetry\", \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\" }\n] }",
+        "type": "json"
+      },
+      {
+        "title": "Setting keys from \"properties.json\":",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d @properties.json",
+        "type": "json"
+      },
+      {
+        "title": "Removing the key \"utf-8 poetry\" from the command line and updating the \"env_type\" one:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d '{ \"properties\": [{ \"name\":\"utf-8 poetry\", \"value\":\"\"}, {\"name\":\"env_type\", \"value\":\"deprovisioned\"}] }'",
+        "type": "json"
+      },
+      {
+        "title": "Removing the key \"env_type\" and changing \"shell\" (no JSON):",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X POST  https://rudder.example.com/rudder/api/latest/nodes/NodeID -d \"properties=shell=/bin/false\" -d \"properties=env_type=\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"updateNodeProperties\",\n  \"id\": \"4db088c8-d849-4f08-bfa9-ac96a22d461a\",\n  \"result\": \"success\",\n  \"data\": {\n    \"properties\": [\n      {\n        \"name\": \"env_type\",\n        \"value\": \"production\"\n      },\n      {\n        \"name\": \"shell\",\n        \"value\": \"/bin/sh\"\n      },\n      {\n        \"name\": \"utf-8 poetry\",\n        \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/node.md",
+    "groupTitle": "Nodes",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Node.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "put",
+    "url": "/api/rules",
+    "title": "6. Clone a Rule",
+    "version": "2.0.0",
+    "name": "cloneRule",
+    "group": "Rules",
+    "description": "<p>Create a new Rule based on an existing Rule. you can still modify its parameters, but you need at least to specify the name of the new Rule</p> ",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": false,
+            "field": "source",
+            "description": "<p>ID of the Rule the clone will be based onto. if this parameter is missing there will be only a Rule creation.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "displayName",
+            "description": "<p>Name of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": true,
+            "field": "id",
+            "defaultValue": "autoGenerated",
+            "description": "<p>Define the id of the Rule to create, Rudder will generate an id if this is missing. You should only use it for specific use case.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "shortDescription",
+            "description": "<p>Short description of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "longDescription",
+            "description": "<p>Long description of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "defaultValue": "true",
+            "description": "<p>enabled the Rule at creation. But this parameter can be overriden : if you want to create Rule with directives and Rule targets directly with workflow enabled, the Rule will be created disabled (to prevent creating active Rule without validation).</p> "
+          }
+        ],
+        "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
+          {
+            "group": "Multi",
+            "type": "UUID",
+            "optional": true,
+            "field": "directives",
+            "description": "<p>link one directive to the Rule. value needs to be an existing directive ID.</p> "
+          },
+          {
+            "group": "Multi",
+            "type": "RuleTarget",
+            "optional": true,
+            "field": "targets",
+            "description": "<p>Link one target to the Rule. Rule targets are &quot;group:groupId&quot; and the special targets : &quot;special:all&quot; and &quot;special:all_exceptPolicyServers&quot;.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/rules?prettify=true  -d \"source=RuleIDSource\" -d \"displayName=Name of New Rule”",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"createRule\",\n        \"id\":\"73fb7802-5326-483a-a6d6-c29e78449558\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"id\":\"73fb7802-5326-483a-a6d6-c29e78449558\",\n            \"displayName\":\"Cloned Rule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"c4f58823-5cd6-455b-b0bc-1511c51e2533\"],\n            \"targets\":[\"group:1e975cb2-b929-46f5-9b1c-5e4d5d5f1027\"],\n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "      HTTP/1.1 500 Server Error\n      {\n        \"action\":\"createRule\",\n        \"id\":\"4f7fb9e5-e9e2-41be-99fc-bfd95a733360\",\n        \"result\":\"error\",\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/rule.md",
+    "groupTitle": "Rules"
+  },
+  {
+    "type": "put",
+    "url": "/api/rules",
+    "title": "3. Create a new Rule",
+    "version": "2.0.0",
+    "name": "createRule",
+    "group": "Rules",
+    "description": "<p>Create a new Rule in Rudder. You can define all of its parameters, but you need at least its name</p> ",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken -X PUT http://rudder.example.com/rudder/api/latest/rules -d \"displayName=Name of New Rule\"",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/rule.md",
+    "groupTitle": "Rules",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "displayName",
+            "description": "<p>Name of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "UUID",
+            "optional": true,
+            "field": "id",
+            "defaultValue": "autoGenerated",
+            "description": "<p>Define the id of the Rule to create, Rudder will generate an id if this is missing. You should only use it for specific use case.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "shortDescription",
+            "description": "<p>Short description of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "longDescription",
+            "description": "<p>Long description of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "defaultValue": "true",
+            "description": "<p>enabled the Rule at creation. But this parameter can be overriden : if you want to create Rule with directives and Rule targets directly with workflow enabled, the Rule will be created disabled (to prevent creating active Rule without validation).</p> "
+          }
+        ],
+        "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
+          {
+            "group": "Multi",
+            "type": "UUID",
+            "optional": true,
+            "field": "directives",
+            "description": "<p>link one directive to the Rule. value needs to be an existing directive ID.</p> "
+          },
+          {
+            "group": "Multi",
+            "type": "RuleTarget",
+            "optional": true,
+            "field": "targets",
+            "description": "<p>Link one target to the Rule. Rule targets are &quot;group:groupId&quot; and the special targets : &quot;special:all&quot; and &quot;special:all_exceptPolicyServers&quot;.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/rules/{id}",
+    "title": "5. Delete a Rule",
+    "version": "2.0.0",
+    "name": "deleteRule",
+    "group": "Rules",
+    "description": "<p>Delete the Rule having the ID passed in the URL</p> ",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/rules/176ad06b-ed02-4da3-8053-16225d217741?prettify=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"deleteRule\",\n        \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"changeRequestId\":\"47\",\n            \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n            \"displayName\":\"toto2\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "      HTTP/1.1 500\n      {\n        \"action\":\"deleteRule\",\n        \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n        \"result\":\"error\",\n        \"error details\":\"Could not delete Rule 176ad06b-ed02-4da3-8053-16225d217741 cause is: Could not find Rule 176ad06b-ed02-4da3-8053-16225d217741.\"\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/rule.md",
+    "groupTitle": "Rules",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of he Rule</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "get",
+    "url": "/api/rules",
+    "title": "1. List all Rules",
+    "version": "2.0.0",
+    "name": "listRules",
+    "group": "Rules",
+    "description": "<p>Get all Rules available in Rudder</p> ",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/rules?prettify=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"listRules\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"to\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          },{\n            \"id\":\"628abf7b-8b5c-4c44-8cca-437b636a9523\",\n            \"displayName\":\"My roule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"e61c0696-172b-46bb-80a9-d6f5ef1d2f85\"],\n            \"targets\":[\"special:all_exceptPolicyServers\"],\n            \"enabled\":true,\n            \"system\":false\n          },{\n            \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n            \"displayName\":\"My first Rule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"],\n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/rule.md",
+    "groupTitle": "Rules"
+  },
+  {
+    "type": "get",
+    "url": "/api/rules/{id}",
+    "title": "2. Get a Rule details",
+    "version": "2.0.0",
+    "name": "ruleDetails",
+    "group": "Rules",
+    "description": "<p>Get the details of one Rule, whose ID is specified in the URL</p> ",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/rules/06ba8940-ed6c-4102-ba46-93d640a64c36?prettify=true",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"ruleDetails\",\n        \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n            \"displayName\":\"My first Rule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"], \n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/rule.md",
+    "groupTitle": "Rules",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of he Rule</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/rules/{id}",
+    "title": "4. Update a Rule",
+    "version": "2.0.0",
+    "name": "updateRule",
+    "group": "Rules",
+    "description": "<p>Modify any parameters of a Rule. Missing parameters means to not modify that parameter</p> ",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "displayName",
+            "description": "<p>Name of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enabled",
+            "description": "<p>Enable/disable the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "shortDescription",
+            "description": "<p>Short description of the Rule.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "longDescription",
+            "description": "<p>Long description of the Rule.</p> "
+          }
+        ],
+        "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
+          {
+            "group": "Multi",
+            "type": "UUID",
+            "optional": true,
+            "field": "directives",
+            "description": "<p>Link one directive to the Rule. value needs to be an existing directive ID.</p> "
+          },
+          {
+            "group": "Multi",
+            "type": "Ruletarget",
+            "optional": true,
+            "field": "targets",
+            "description": "<p>Link one target to the Rule. Rule targets are for groups : &quot;group:groupId&quot;, nodes : &quot;node:nodeId&quot; and the special targets : &quot;special:all&quot; and &quot;special:all_exceptPolicyServers&quot;.</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of he Rule</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "    Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/rules/RuleID -d \"displayName=Name of Rule\"",
+        "type": "json"
+      }
+    ],
+    "filename": "src/api_v2/rule.md",
+    "groupTitle": "Rules"
+  }
+]

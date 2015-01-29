@@ -4,7 +4,7 @@ import json
 import re
 import pprint
 
-file=open("api_data.json")
+file=open("../api_data.json")
 data=json.load(file)
 file.close()
 
@@ -14,6 +14,11 @@ def generate(function):
   name   = convert(function['name'])
   method = function['type'].upper()
   url    = function['url']
+  match = re.match(r'\s*\d+\.\s*(.*)', function['title'])
+  if match:
+    title  = match.group(1)
+  else:
+    raise "No title for " + name
 
   url_params = []
   mandatory_params = []
@@ -37,7 +42,8 @@ def generate(function):
   parameters.extend([x+'=None' for x in optional_params])
 
   # write method code
-  print('  def ' + name + '(' + ', '.join(['self'] + parameters) + '):')
+  print('  def ' + name + '(' + ', '.join(['self'] + parameters + ['return_raw=False']) + '):')
+  print('    """ ' + title + ' (' + method.lower() + ') """')
   if method == 'PUT' or method == 'POST':
     print('    data = { ')
     for param in mandatory_params:
@@ -48,11 +54,11 @@ def generate(function):
     print('    clean_params(data)')
   final_url = '"' + url.replace('{', '" + ').replace('}', ' + "') + '"'
   if method == 'GET':
-    print('    return self.request("' + method + '", ' + final_url + ')')
+    print('    return self.request("' + method + '", ' + final_url + ', return_raw=return_raw)')
   elif method == 'DELETE':
-    print('    return self.request("' + method + '", ' + final_url + ', change_info)')
+    print('    return self.request("' + method + '", ' + final_url + ', change_info, return_raw=return_raw)')
   else:
-    print('    return self.request("' + method + '", ' + final_url + ', change_info, data)')
+    print('    return self.request("' + method + '", ' + final_url + ', change_info, data, return_raw=return_raw)')
   print('')
 
 

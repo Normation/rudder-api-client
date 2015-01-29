@@ -1,0 +1,373 @@
+#!/usr/bin/python
+
+"""
+
+A CLI interface the Rudder Web API.
+
+Usage:
+  rudder-cli <object> <command> [options]
+Options:
+ -h --help                Show help
+ -f --conffile=<file>     Configuration file (default: ~/.rudder)
+ -u --url=<url>           Base URL (default: https://localhost/rudder)
+ -t --token=<token>       API token (create one from Rudder administration)
+ -a --ca=<file>           Certificate authority to use to verify SSL (default: python CA bundle)
+ --skip-verify            To avoid SSL certificate verification
+ -p --proxy=<proxy>       Proxy to use to connect to api (default: '')
+ --timeout=<timeout>      Timeout default duration in seconds (default: 5s)
+ -r --raw                 Print raw answer
+ --reason=<reason>        Reason message for changes (default '')
+ --cr-name=<name>         Change Request name (default defined in Rudder)
+ --cr-description=<text>  Change Request description
+ -j --json=<file>         Add a json input (can be used instead of optional parameters, defaults to stdin for direct api call)
+
+"""
+
+from rudder import RudderEndPoint
+from pprint import pprint
+from docopt import docopt
+import inspect
+import requests
+import json
+import os
+import re
+import sys
+
+
+# Mapping between commands and api calls
+functions = {
+        'nodes' : {
+                'list': 'list_accepted_nodes',
+                'list_pending': 'list_pending_nodes',
+                'show': 'accepted_node_details',
+                'delete': 'delete_node',
+                'update_status': 'change_node_status',
+                'update_properties': 'update_node_properties',
+            },
+        'groups' : {
+                'list': 'list_groups',
+                'show': 'group_details',
+                'create': 'create_group',
+                'clone': 'clone_group',
+                'delete': 'delete_group',
+                'update': 'update_group',
+                'reload': 'reload_group',
+            },
+        'rules' : {
+                'list': 'list_rules',
+                'show': 'rule_details',
+                'create': 'create_rule',
+                'clone': 'clone_rule',
+                'delete': 'clone_rule',
+                'update': 'update_rule',
+            },
+        'directives': {
+                'list': 'list_directives',
+                'show': 'directive_details',
+                'create': 'create_directive',
+                'clone': 'clone_directive',
+                'delete': 'delete_directive',
+                'update': 'update_directive',
+            },
+        'change-requests' : {
+                'list': 'list_change_requests',
+                'show': 'change_request_details',
+                'accept': 'accept_change_request',
+                'decline': 'decline_change_request',
+                'update': 'update_change_request',
+            },
+# TODO currently broken, uncommend when #6024 is resolved
+#        'parameters': {
+#                'list': 'list_parameters',
+#                'show': 'parameter_details',
+#                'create': 'create_parameter',
+#                'delete': 'delete_parameter',
+#                'update': 'update_parameter',
+#            },
+        }
+
+
+# Load the configuration file
+def load_config(filename):
+  try: # Python 2
+    from ConfigParser import ConfigParser
+  except ImportError: # Python 3
+    from configparser import ConfigParser
+  try: # python >= 2.7
+    config = ConfigParser(allow_no_value=True)
+  except TypeError:
+    config = ConfigParser()
+  config.read(os.path.expanduser(filename))
+  sections = config.sections()
+  if len(sections) == 0:
+    return {}
+  conf = dict(("--"+key, True if value is None else value)
+              for key, value in config.items(sections[0]))
+  return conf
+
+
+# Detect proxy from environment, depending on url type
+def get_proxy(conf, args):
+  if '--url' in args:
+    url = args['--url']
+  elif '--url' in conf:
+    url = conf['--url']
+  else:
+    return ''
+  match = re.match(r'^(https?).*', url)
+  if match is None:
+    return None
+  url_type = match.group(1)
+  if url_type + "_proxy" in os.environ:
+    return os.environ[url_type + "_proxy"]
+  if url_type + "_PROXY" in os.environ:
+    return os.environ[url_type + "_PROXY"]
+  if url_type.upper() + "_PROXY" in os.environ:
+    return os.environ[url_type.upper() + "_PROXY"]
+  return None
+
+
+# Remove None values in a dictionary
+def clean_params(data):
+  for k,v in list(data.items()): #python 2 3 compatible
+    if not v:
+      del(data[k])
+
+
+# get the object name we are working on given a parsed argument list
+def get_objname(args):
+  for objname in functions:
+    if objname in args:
+      if args[objname]:
+        return objname
+    if objname[:-1] in args:
+      if args[objname[:-1]]: # try with the singular form
+        return objname
+  raise "BUG HERE" # should never happen since docopt handles this case
+
+
+# get the method we are working on given a parsed argument list
+def get_command(args, objname):
+  obj = functions[objname]
+  for command in obj:
+    if command in args:
+      return command
+  raise "BUG HERE" # should never happen since docopt handles this case
+
+
+# retrieve the endpoint's method from command line parameters
+def get_api_method(endpoint, obj, command):
+  method_name = None
+  if obj not in functions: # try with the plural form
+      obj = obj + "s"
+  if obj in functions:
+    if command in functions[obj]:
+      method_name = functions[obj][command]
+  if method_name is None:
+    print("I don't know what to do ")
+    exit(3)
+  try:
+    return getattr(endpoint, method_name)
+  except AttributeError:
+    print("Unknown function name: " + method_name)
+    exit(3)
+
+
+# get all parameters of an api method from the library
+def get_api_parameters(method):
+  spec = inspect.getargspec(method)
+  # get arguments  except self and return_raw
+  #args = method.func_code.co_varnames[:method.func_code.co_argcount][1:-1]
+  args = spec.args[1:-1]
+  # get defaults, except for return_raw
+  defaults = spec.defaults[:-1]
+  # extract mandatory parameters
+  mandatory = []
+  if len(defaults) == 0:
+    for i in args:
+      mandatory.append('<'+i+'>')
+  else:
+    for i in args[:-len(defaults)]:
+      mandatory.append('<'+i+'>')
+  # extract optional parameters (except change_info)
+  optional = []
+  if len(defaults) >1:
+    defaults = defaults[1:]
+    for i in args[-len(defaults):]:
+      optional.append('--'+i)
+  return (mandatory, optional)
+
+
+# edit the program doctring to add the commands dected from API
+# this is to have docopt functionnalities
+def update_doc(doc, objname=None):
+  subdoc = ""
+  if objname is None:
+    subdoc += "  rudder-cli api <method> <api_url> [options]\n"
+    for objname in functions:
+        subdoc += "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) [<args>...] [options]\n"
+  else:
+    for command in functions[objname]:
+      method = get_api_method(RudderEndPoint, objname, command)
+      (mandatory, optional) = get_api_parameters(method)
+      parameters = ["["+x+"=<value>]" for x in optional]
+      subdoc +=  "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) " + command + " [options] " + " ".join(mandatory) + " " + " ".join(parameters) + "\n"
+  return re.sub(r'  rudder-cli <object> <command> \[options\]', subdoc, __doc__)
+
+
+##
+## MAIN
+##
+if __name__ == "__main__":
+  # defaults (not managed by docopt to be able to use conffile)
+  conf = { "--conffile": "~/.rudder",
+           "--timeout": "5",
+           "--raw": False,
+           "--skip-verify": False,
+           "--url": "https://localhost/rudder",
+          }
+
+  # options from command line
+  args = docopt(update_doc(__doc__), argv=sys.argv[1:], options_first=True)
+  clean_params(args)
+  if 'api' in args:
+    arguments = docopt(update_doc(__doc__), argv=sys.argv[1:])
+  else:
+    # subcommand options
+    objname = get_objname(args)
+    argv = [ objname ] + args['<args>']
+    arguments = docopt(update_doc(__doc__, objname), argv=argv)
+  clean_params(arguments)
+
+  # options from configuration file
+  if '--conffile' in arguments:
+    configuration = load_config(arguments['--conffile'])
+  else:
+    configuration = load_config(conf['--conffile'])
+
+  # take default proxy from environment (can depend on the url parameter)
+  conf["--proxy"] = get_proxy(configuration, arguments)
+
+  # defaults that depends on arguments
+  if 'api' in arguments:
+    conf["--raw"] = True
+
+  # configuration overriding : env -> conffile -> arguments
+  conf.update(configuration)
+  conf.update(arguments)
+
+  # reinterpret some options
+  timeout = float(conf["--timeout"])
+  verify = not conf["--skip-verify"]
+  if verify and "--ca" in conf:
+    verify = conf["--ca"]
+
+  # Mandatory options
+  if "--url" not in conf:
+    print("Error: A Rudder URL is needed")
+    exit(6)
+  if "--token" not in conf:
+    print("Error: A Rudder API token is needed")
+    exit(7)
+
+  # endpoint for the call
+  endpoint = RudderEndPoint(conf["--url"], conf["--token"], verify=verify, timeout=timeout, proxy=conf['--proxy'])
+
+  # get the http method (get, ...)
+  if 'api' in conf:
+    method = conf["<method>"].lower()
+    if method != 'get':
+      conf['--json'] = '-'
+  else:
+    objname = get_objname(arguments)
+    command = get_command(arguments, objname)
+    docstring = get_api_method(endpoint, objname, command).__doc__
+    match = re.search(r'\((\w+)\)', docstring)
+    if match:
+      method=match.group(1)
+    else:
+      method='get'
+ 
+  # change management
+  change_info = None
+  if method != 'get':
+    cinfo = {}
+    if '--reason' in conf:
+      cinfo['reason'] = conf['--reason']
+    if '--cr-name' in conf:
+      cinfo['changeRequestName'] = conf['--cr-name']
+    if '--cr-description' in conf:
+      cinfo['changeRequestDescription'] = conf['--cr-description']
+    if cinfo:
+      change_info = cinfo
+
+  # input management
+  json_data = None
+  if '--json' in conf:
+    if conf['--json'] == '-':
+      json_data = sys.stdin.read()
+    else:
+      if not os.path.isfile(conf['--json']):
+        print("File does not exist " + conf['--json'])
+        exit(11)
+      with open(conf['--json'], 'r') as fd:
+        json_data = fd.read()
+    if re.match("\s*", json_data):
+      json_data = None
+
+  # call API directly
+  if 'api' in conf:
+    separator = "&" if re.match(r'\?', conf["<api_url>"]) else "?"
+    try:
+      res = endpoint.request(conf["<method>"].upper(),
+                             conf["<api_url>"] + separator + "prettify=true",
+                             change_info = change_info,
+                             json_data = json_data,
+                             return_raw = conf["--raw"])
+    except requests.exceptions.RequestException as e:
+      print("Error in calling " + conf["<api_url>"])
+      pprint(e)
+      pprint(e.response.text)
+      exit(10)
+
+
+  # call api via endpoint method call
+  else:
+    # prepare parameters
+    kwargs = { "return_raw": conf["--raw"] }
+    function = get_api_method(endpoint, objname, command)
+    #params = function.func_code.co_varnames[:function.func_code.co_argcount][1:-1]
+    params = inspect.getargspec(function).args[1:-1]
+    for param in params:
+      p = '--' + param
+      if '<'+param+'>' in arguments:
+        kwargs[param] = arguments['<'+param+'>']
+      elif p in arguments:
+        if arguments[p] is not False:
+          kwargs[param] = arguments[p]
+    if change_info is not None:
+      kwargs['change_info'] = change_info
+    if json_data is not None:
+      kwargs.update(json.loads(json_data))
+
+    # call
+    try:
+      res = function(**kwargs)
+    except TypeError as e:
+      print("Wrong parameter used in: " + function.__name__)
+      exit(4)
+    except requests.exceptions.SSLError as e:
+      print("SSL verification failed, try with --skip-verify")
+      exit(10)
+    except requests.exceptions.RequestException as e:
+      print("Error in calling " + function.__name__)
+      pprint(e)
+      pprint(e.response.text)
+      exit(10)
+
+  # display results
+  if conf["--raw"]:
+    print(res)
+  else:
+    print(json.dumps(res, ensure_ascii=False, indent=4, sort_keys=True))
+
