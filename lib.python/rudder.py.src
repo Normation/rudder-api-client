@@ -16,10 +16,10 @@ class RudderError(requests.exceptions.RequestException):
     resp = kwargs.get('response', None)
     try:
       self.rudder_info = json.loads(resp.text)
-      self.rudder_message = self.rudder_info['errorDetails']
+      self.message = self.rudder_info['errorDetails']
     except ValueError:
-      self.rudder_message = resp.text
-    super(RudderError, self).__init__(*args, **kwargs)
+      self.message = resp.text
+    super(RudderError, self).__init__()
 
 
 class RudderEndPoint:
