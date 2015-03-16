@@ -29,7 +29,7 @@ And put this script in /usr/local/bin/rudder-cli
     BASE=<your_repo_path>
     PYTHONPATH=${BASE}/lib.python
     export PYTHONPATH
-    $[BASE}/cli/rudder-cli "$@"
+    ${BASE}/cli/rudder-cli "$@"
 
 Then create a Rudder API token from Rudder Administration menu > API Accounts
 
