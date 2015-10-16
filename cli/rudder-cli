@@ -34,7 +34,7 @@ import os
 import re
 import sys
 
-
+requests.packages.urllib3.disable_warnings()
 # Mapping between commands and api calls
 functions = {
         'nodes' : {
