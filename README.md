@@ -17,7 +17,7 @@ Installation
 ------------
 This is a preview code, you need to install it from github at the moment.
 
-Dependencies: requests and docopt. It should work with python2 and python3.
+Dependencies: requests, urllib3 and docopt. It should work with python2 and python3.
 
 Clone the repository, then run:
 
