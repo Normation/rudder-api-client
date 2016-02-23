@@ -378,7 +378,7 @@ if __name__ == "__main__":
         print(endpoint.debug_query)
       print("Error in calling " + function.__name__)
       pprint(e)
-      pprint(e.response.text)
+      pprint(e.rudder_message)
       exit(10)
 
   # display debug data

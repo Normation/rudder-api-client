@@ -14,7 +14,7 @@
             "type": "WorkflowStatus",
             "optional": false,
             "field": "status",
-            "description": "<p>Final status in which the change Request will be after acceptance.</p> <pre><code>&lt;div&gt;&lt;span class=&quot;values&quot;&gt;Possible values: &lt;/span&gt;&lt;ul class=&quot;values&quot;&gt;&lt;li&gt;pending deployment&lt;/li&gt;&lt;li&gt;deployed&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;br style=&quot;clear:both&quot;/&gt; </code></pre>"
+            "description": "<p>Final status in which the change Request will be after acceptance.     <div><span class=\"values\">Possible values: </span><ul class=\"values\"><li>pending deployment</li><li>deployed</li></ul></div><br style=\"clear:both\"/></p> "
           }
         ],
         "URL parameters": [
@@ -31,7 +31,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    // Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/changeRequests/42/accept -d \"status=deployed\"",
+        "content": "// Update display name: \ncurl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/changeRequests/42/accept -d \"status=deployed\"",
         "type": "json"
       }
     ],
@@ -57,7 +57,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/changeRequests/42",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/changeRequests/42",
         "type": "json"
       }
     ],
@@ -96,7 +96,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/changeRequests/42",
+        "content": "curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/changeRequests/42",
         "type": "json"
       }
     ],
@@ -141,7 +141,7 @@
             "optional": true,
             "field": "status",
             "defaultValue": "open",
-            "description": "<p>The status of change requests you want to display.</p> <pre><code>&lt;div&gt;&lt;span class=&quot;values&quot;&gt;Possible values: &lt;/span&gt;&lt;ul class=&quot;values&quot;&gt;&lt;li&gt;pending validation&lt;/li&gt;&lt;li&gt;pending deployment&lt;/li&gt;&lt;li&gt;cancelled&lt;/li&gt;&lt;li&gt;deployed&lt;/li&gt;&lt;li&gt;open (pending validation + pending deployment)&lt;/li&gt;&lt;li&gt;closed (cancelled + deployed)&lt;/li&gt;&lt;li&gt;all&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;br style=&quot;clear:both&quot;/&gt; </code></pre>"
+            "description": "<p>The status of change requests you want to display.     <div><span class=\"values\">Possible values: </span><ul class=\"values\"><li>pending validation</li><li>pending deployment</li><li>cancelled</li><li>deployed</li><li>open (pending validation + pending deployment)</li><li>closed (cancelled + deployed)</li><li>all</li></ul></div><br style=\"clear:both\"/></p> "
           }
         ]
       }
@@ -149,7 +149,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/changeRequests -d \"status=open\"",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/changeRequests -d \"status=open\"",
         "type": "json"
       }
     ],
@@ -157,7 +157,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n  \"action\":\"listChangeRequests\",\n  \"result\":\"success\",\n  \"data\":{\n    \"changeRequests\":[{\n      \"id\":42,\n      \"name\":\"Remove unused security policy\",\n      \"description\":\"\",\n      \"status\":\"Pending validation\",\n      \"isAcceptable\":true,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"delete Rule\"\n          \"rule\":{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"Security Policy\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n    },{\n      \"id\":45,\n      \"name\":\"Add new package policy for Redhat nodes\",\n      \"description\":\"\",\n      \"status\":\"Pending deployment\",\n      \"isAcceptable\":false,\n      \"created by\":\"jon.doe\",\n      \"changes\":{\n        \"directives\":[],\n        \"groups\":[],\n        \"parameters\":[],\n        \"rules\":[ {\n          \"action\":\"modify Rule\"\n          \"rule\":{\n            \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n            \"displayName\":\"Redhat node configuration\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\": {\n              \"from\" : [\"cba93d24-8780-4308-b732-84995125562a\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n              \"to\" : [\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            }\n            \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"],\n            \"enabled\":false,\n            \"system\":false\n          }\n        }]\n      }\n\n    }]\n  }",
+          "content": "  {\n\"action\":\"listChangeRequests\",\n\"result\":\"success\",\n\"data\":{\n  \"changeRequests\":[{\n    \"id\":42,\n    \"name\":\"Remove unused security policy\",\n    \"description\":\"\",\n    \"status\":\"Pending validation\",\n    \"isAcceptable\":true,\n    \"created by\":\"jon.doe\",\n    \"changes\":{\n      \"directives\":[],\n      \"groups\":[],\n      \"parameters\":[],\n      \"rules\":[ {\n        \"action\":\"delete Rule\"\n        \"rule\":{\n          \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n          \"displayName\":\"Security Policy\",\n          \"shortDescription\":\"\",\n          \"longDescription\":\"\",\n          \"directives\":[],\n          \"targets\":[],\n          \"enabled\":false,\n          \"system\":false\n        }\n      }]\n    }\n  },{\n    \"id\":45,\n    \"name\":\"Add new package policy for Redhat nodes\",\n    \"description\":\"\",\n    \"status\":\"Pending deployment\",\n    \"isAcceptable\":false,\n    \"created by\":\"jon.doe\",\n    \"changes\":{\n      \"directives\":[],\n      \"groups\":[],\n      \"parameters\":[],\n      \"rules\":[ {\n        \"action\":\"modify Rule\"\n        \"rule\":{\n          \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n          \"displayName\":\"Redhat node configuration\",\n          \"shortDescription\":\"\",\n          \"longDescription\":\"\",\n          \"directives\": {\n            \"from\" : [\"cba93d24-8780-4308-b732-84995125562a\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            \"to\" : [\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n          }\n          \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"],\n          \"enabled\":false,\n          \"system\":false\n        }\n      }]\n    }\n\n  }]\n}",
           "type": "json"
         }
       ]
@@ -204,7 +204,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    // Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/changeRequests/42  -d \"name=new Name of Change Request\" -d \"description=add a new description\"",
+        "content": "// Update display name: \ncurl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/changeRequests/42  -d \"name=new Name of Change Request\" -d \"description=add a new description\"",
         "type": "json"
       }
     ],
@@ -303,7 +303,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"source=DirectiveIDSource\" -d \"displayName=Name of New Directive”",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"source=DirectiveIDSource\" -d \"displayName=Name of New Directive”",
         "type": "json"
       }
     ],
@@ -385,7 +385,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"techniqueName=copyGitFile\" -d \"displayName=Copy a test file from shared folder\" -d @parameters",
+        "content": "curl -H \"X-API-Token: yourToken -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"techniqueName=copyGitFile\" -d \"displayName=Copy a test file from shared folder\" -d @parameters",
         "type": "json"
       }
     ],
@@ -393,7 +393,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "    {\n    \"action\":\"createDirective\",\n    \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n    \"result\":\"success\",\n    \"data\":{\n      \"directives\":[{\n        \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n        \"displayName\":\"Copy a test file from shared folder\",\n        \"shortDescription\":\"\",\n        \"longDescription\":\"\",\n        \"techniqueName\":\"copyGitFile\",\n        \"techniqueVersion\":\"1.3\",\n        \"parameters\":{\n          \"section\":{\n            \"name\":\"sections\",\n            \"sections\":[{\n              \"section\":{\n                \"name\":\"Copy file and PostHook\",\n                \"sections\":[{\n                  \"section\":{\n                    \"name\":\"Copy file\",\n                    \"vars\":[{\n                      \"var\":{\n                        \"name\":\"COPYFILE_COMPARE_METHOD\",\n                        \"value\":\"mtime\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_DESTINATION\",\n                        \"value\":\"/tmp/test2\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_GROUP\",\n                        \"value\":\"root\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_NAME\",\n                        \"value\":\"/tmp/test\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_OWNER\",\n                        \"value\":\"root\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_PERM\",\n                        \"value\":\"000\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_RECURSION\",\n                        \"value\":\"0\"\n                      }\n                    }]\n                  }\n                },{\n                  \"section\":{\n                    \"name\":\"Post-modification hook\",\n                    \"vars\":[{\n                      \"var\":{\n                        \"name\":\"COPYFILE_POST_HOOK_COMMAND\",\n                        \"value\":\"\"\n                      }\n                    },{\n                      \"var\":{\n                        \"name\":\"COPYFILE_POST_HOOK_RUN\",\n                        \"value\":\"false\"\n                      }\n                    }]\n                  }\n                }]\n              }\n            }]\n          }\n        },\n        \"priority\":5,\n        \"isEnabled\":false,\n        \"isSystem\":false\n      }]\n    }\n  }",
+          "content": "  {\n  \"action\":\"createDirective\",\n  \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n      \"displayName\":\"Copy a test file from shared folder\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"techniqueName\":\"copyGitFile\",\n      \"techniqueVersion\":\"1.3\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"Copy file and PostHook\",\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"Copy file\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_COMPARE_METHOD\",\n                      \"value\":\"mtime\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_DESTINATION\",\n                      \"value\":\"/tmp/test2\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_GROUP\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_NAME\",\n                      \"value\":\"/tmp/test\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_OWNER\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_RECURSION\",\n                      \"value\":\"0\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"isEnabled\":false,\n      \"isSystem\":false\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -411,7 +411,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/directives/DirectiveID",
+        "content": "curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/directives/DirectiveID",
         "type": "json"
       }
     ],
@@ -441,7 +441,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/directives/DirectiveID",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/directives/DirectiveID",
         "type": "json"
       }
     ],
@@ -471,7 +471,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/directives",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/directives",
         "type": "json"
       }
     ],
@@ -561,7 +561,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    // Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/directives/DirectiveID  -d \"displayName=Name of New Directive\"",
+        "content": "// Update display name: \ncurl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/directives/DirectiveID  -d \"displayName=Name of New Directive\"",
         "type": "json"
       }
     ],
@@ -636,7 +636,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/groups -d “groups=GroupID”",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/groups -d “groups=GroupID”",
         "type": "json"
       }
     ],
@@ -711,7 +711,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/groups -d @JSON-file-name",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/groups -d @JSON-file-name",
         "type": "json"
       }
     ],
@@ -728,7 +728,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/groups/GroupID",
+        "content": "curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/groups/GroupID",
         "type": "json"
       }
     ],
@@ -758,7 +758,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/groups/GroupID",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/groups/GroupID",
         "type": "json"
       }
     ],
@@ -788,7 +788,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/groups",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/groups",
         "type": "json"
       }
     ],
@@ -797,7 +797,7 @@
   },
   {
     "type": "post",
-    "url": "/api/groups/:id/reload",
+    "url": "/api/groups/{id}/reload",
     "title": "5. Reload a Group",
     "version": "2.0.0",
     "name": "reloadGroup",
@@ -878,7 +878,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/groups/GroupID -d \"displayName=Name of New Group\"",
+        "content": "Update display name: \ncurl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/groups/GroupID -d \"displayName=Name of New Group\"",
         "type": "json"
       }
     ],
@@ -918,7 +918,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/NodeID\\?include=full",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/NodeID\\?include=full",
         "type": "json"
       }
     ],
@@ -966,7 +966,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X POST https://rudder.example.com/rudder/api/latest/nodes/pending/NodeID -d \"status=accepted\"",
+        "content": "curl -H \"X-API-Token: yourToken\" -X POST https://rudder.example.com/rudder/api/latest/nodes/pending/NodeID -d \"status=accepted\"",
         "type": "json"
       }
     ],
@@ -983,7 +983,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE https://rudder.example.com/rudder/api/latest/nodes/NodeID",
+        "content": "curl -H \"X-API-Token: yourToken\" -X DELETE https://rudder.example.com/rudder/api/latest/nodes/NodeID",
         "type": "json"
       }
     ],
@@ -1031,7 +1031,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes",
         "type": "json"
       }
     ],
@@ -1057,7 +1057,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/pending",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/pending",
         "type": "json"
       }
     ],
@@ -1080,26 +1080,48 @@
     "version": "5.0.0",
     "name": "updateNodeProperties",
     "group": "Nodes",
+    "parameter": {
+      "fields": {
+        "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
+          {
+            "group": "Multi",
+            "type": "Property",
+            "optional": false,
+            "field": "properties",
+            "description": "<p>A property of the Node defined by its name and its value.</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID of the Node.</p> "
+          }
+        ]
+      }
+    },
     "description": "<p>This API allows to set &quot;key=value&quot; properties in node. This properties are then returned in the node details under the &quot;properties&quot; key, and they can be used to define group.     Value are non-empty UTF-8 strings. Setting a key to the empty string removes it from the list of properties for that node.</p> ",
     "examples": [
       {
-        "title": "Given the \"properties.json\" JSON file with content:",
-        "content": "{ \"properties\": [\n  { \"name\": \"env_type\"    , \"value\": \"production\" },\n  { \"name\": \"shell\"       , \"value\": \"/bin/sh\" },\n  { \"name\": \"utf-8 poetry\", \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\" }\n] }",
+        "title": "Initial content",
+        "content": "# Given the \"properties.json\" JSON file with content:\n{ \"properties\": [\n  { \"name\": \"env_type\"    , \"value\": \"production\" },\n  { \"name\": \"shell\"       , \"value\": \"/bin/sh\" },\n  { \"name\": \"utf-8 poetry\", \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\" }\n] }",
         "type": "json"
       },
       {
-        "title": "Setting keys from \"properties.json\":",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d @properties.json",
+        "title": "Set key",
+        "content": "# Setting keys from \"properties.json\":\ncurl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d @properties.json",
         "type": "json"
       },
       {
-        "title": "Removing the key \"utf-8 poetry\" from the command line and updating the \"env_type\" one:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d '{ \"properties\": [{ \"name\":\"utf-8 poetry\", \"value\":\"\"}, {\"name\":\"env_type\", \"value\":\"deprovisioned\"}] }'",
+        "title": "Remove key",
+        "content": "# Removing the key \"utf-8 poetry\" from the command line and updating the \"env_type\" one:\ncurl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d '{ \"properties\": [{ \"name\":\"utf-8 poetry\", \"value\":\"\"}, {\"name\":\"env_type\", \"value\":\"deprovisioned\"}] }'",
         "type": "json"
       },
       {
-        "title": "Removing the key \"env_type\" and changing \"shell\" (no JSON):",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X POST  https://rudder.example.com/rudder/api/latest/nodes/NodeID -d \"properties=shell=/bin/false\" -d \"properties=env_type=\"",
+        "title": "Remove key (bis)",
+        "content": "# Removing the key \"env_type\" and changing \"shell\" (no JSON):\ncurl -H \"X-API-Token: yourToken\" -X POST  https://rudder.example.com/rudder/api/latest/nodes/NodeID -d \"properties=shell=/bin/false\" -d \"properties=env_type=\"",
         "type": "json"
       }
     ],
@@ -1113,20 +1135,242 @@
       ]
     },
     "filename": "src/api_v2/node.md",
-    "groupTitle": "Nodes",
+    "groupTitle": "Nodes"
+  },
+  {
+    "type": "put",
+    "url": "/api/parameters",
+    "title": "3. Create a new Parameter",
+    "version": "2.0.0",
+    "name": "createGroup",
+    "group": "Parameters",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" -H \"Content-Type: application/json\" -X PUT https://rudder.example.com/rudder/api/latest/parameters -d @JSON-file-name",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"createParameter\",\n  \"id\": \"rudder_file_edit_footer\",\n  \"result\": \"success\",\n  \"data\": {\n    \"parameters\": [\n      {\n        \"id\": \"rudder_file_edit_footer\",\n        \"value\": \"### End of file managed by Rudder ###\",\n        \"description\": \"Default inform message put in footer of managed files by Rudder\",\n        \"overridable\": false\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/parameter.md",
+    "groupTitle": "Parameters",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID/name of the Parameter to create.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Parameter.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "value",
+            "description": "<p>Value of the Parameter.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "overridable",
+            "description": "<p>The value can be overidden by Node Parameter (not existing in 2.7)</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "delete",
+    "url": "/api/parameters/{id}",
+    "title": "5. Delete a Parameter",
+    "version": "2.0.0",
+    "name": "deleteGroup",
+    "group": "Parameters",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" -X DELETE https://rudder.example.com/rudder/api/latest/parameters/ParameterId",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"deleteParameter\",\n  \"id\": \"rudder_file_edit_footer\",\n  \"result\": \"success\",\n  \"data\": {\n    \"parameters\": [\n      {\n        \"id\": \"rudder_file_edit_footer\",\n        \"value\": \"### Edited by Rudder ###\",\n        \"description\": \"Default inform message put in footer of managed files by Rudder\",\n        \"overridable\": false\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 500 Server Error\n{\n  \"action\": \"deleteParameter\",\n  \"id\": \"rudder_file_edit_footer\",\n  \"result\": \"error\",\n  \"errorDetails\": \"Could not delete Parameter rudder_file_edit_footer cause is: Could not find Parameter rudder_file_edit_footer.\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/parameter.md",
+    "groupTitle": "Parameters",
     "parameter": {
       "fields": {
         "URL parameters": [
           {
             "group": "URL parameters",
-            "type": "UUID",
+            "type": "String",
             "optional": false,
             "field": "id",
-            "description": "<p>ID of the Node.</p> "
+            "description": "<p>ID/name of the Parameter.</p> "
           }
         ]
       }
     }
+  },
+  {
+    "type": "get",
+    "url": "/api/parameters",
+    "title": "1. List all Parameters",
+    "version": "2.0.0",
+    "name": "listGroups",
+    "group": "Parameters",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/parameters",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"listParameters\",\n  \"result\": \"success\",\n  \"data\": {\n    \"parameters\": [\n      {\n        \"id\": \"rudder_file_edit_header\",\n        \"value\": \"### Managed by Rudder, edit with care ###\",\n        \"description\": \"Default inform message put in header of managed files by Rudder\",\n        \"overridable\": true\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/parameter.md",
+    "groupTitle": "Parameters"
+  },
+  {
+    "type": "get",
+    "url": "/api/parameters/{id}",
+    "title": "2. Get Parameter details",
+    "version": "2.0.0",
+    "name": "parameterDetails",
+    "group": "Parameters",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/parameters/ParameterId",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"parameterDetails\",\n  \"id\": \"rudder_file_edit_footer\",\n  \"result\": \"success\",\n  \"data\": {\n    \"parameters\": [\n      {\n        \"id\": \"rudder_file_edit_footer\",\n        \"value\": \"### End of file managed by Rudder ###\",\n        \"description\": \"Default inform message put in footer of managed files by Rudder\",\n        \"overridable\": false\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/parameter.md",
+    "groupTitle": "Parameters",
+    "parameter": {
+      "fields": {
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID/name of the Parameter.</p> "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
+    "url": "/api/parameters/{id}",
+    "title": "4. Update a Parameter",
+    "version": "2.0.0",
+    "name": "updateGroup",
+    "group": "Parameters",
+    "parameter": {
+      "fields": {
+        "Mono valued parameters - Those parameters will only work with one value": [
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "description",
+            "description": "<p>Description of the Parameter.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "value",
+            "description": "<p>Value of the Parameter.</p> "
+          },
+          {
+            "group": "Mono",
+            "type": "Boolean",
+            "optional": true,
+            "field": "overridable",
+            "description": "<p>The value can be overidden by Node Parameter (not existing in 2.7)</p> "
+          }
+        ],
+        "URL parameters": [
+          {
+            "group": "URL parameters",
+            "type": "String",
+            "optional": false,
+            "field": "id",
+            "description": "<p>ID/name of the Parameter.</p> "
+          }
+        ]
+      }
+    },
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" -X POST https://rudder.example.com/rudder/api/latest/parameters/ParameterId -d \"value=### Edited by Rudder ###\"",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"updateParameter\",\n  \"id\": \"rudder_file_edit_footer\",\n  \"result\": \"success\",\n  \"data\": {\n    \"parameters\": [\n      {\n        \"id\": \"rudder_file_edit_footer\",\n        \"value\": \"### Edited by Rudder ###\",\n        \"description\": \"Default inform message put in footer of managed files by Rudder\",\n        \"overridable\": false\n      }\n    ]\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/parameter.md",
+    "groupTitle": "Parameters"
   },
   {
     "type": "put",
@@ -1205,7 +1449,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/rules?prettify=true  -d \"source=RuleIDSource\" -d \"displayName=Name of New Rule”",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/rules?prettify=true  -d \"source=RuleIDSource\" -d \"displayName=Name of New Rule”",
         "type": "json"
       }
     ],
@@ -1213,7 +1457,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"createRule\",\n        \"id\":\"73fb7802-5326-483a-a6d6-c29e78449558\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"id\":\"73fb7802-5326-483a-a6d6-c29e78449558\",\n            \"displayName\":\"Cloned Rule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"c4f58823-5cd6-455b-b0bc-1511c51e2533\"],\n            \"targets\":[\"group:1e975cb2-b929-46f5-9b1c-5e4d5d5f1027\"],\n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\":\"createRule\",\n  \"id\":\"73fb7802-5326-483a-a6d6-c29e78449558\",\n  \"result\":\"success\",\n  \"data\":{\n    \"rules\":[{\n      \"id\":\"73fb7802-5326-483a-a6d6-c29e78449558\",\n      \"displayName\":\"Cloned Rule\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"directives\":[\"c4f58823-5cd6-455b-b0bc-1511c51e2533\"],\n      \"targets\":[\"group:1e975cb2-b929-46f5-9b1c-5e4d5d5f1027\"],\n      \"enabled\":false,\n      \"system\":false\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1222,7 +1466,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "      HTTP/1.1 500 Server Error\n      {\n        \"action\":\"createRule\",\n        \"id\":\"4f7fb9e5-e9e2-41be-99fc-bfd95a733360\",\n        \"result\":\"error\",\n      }",
+          "content": "HTTP/1.1 500 Server Error\n{\n  \"action\":\"createRule\",\n  \"id\":\"4f7fb9e5-e9e2-41be-99fc-bfd95a733360\",\n  \"result\":\"error\",\n}",
           "type": "json"
         }
       ]
@@ -1241,7 +1485,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken -X PUT http://rudder.example.com/rudder/api/latest/rules -d \"displayName=Name of New Rule\"",
+        "content": "curl -H \"X-API-Token: yourToken -X PUT http://rudder.example.com/rudder/api/latest/rules -d \"displayName=Name of New Rule\"",
         "type": "json"
       }
     ],
@@ -1318,7 +1562,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/rules/176ad06b-ed02-4da3-8053-16225d217741?prettify=true",
+        "content": "curl -H \"X-API-Token: yourToken\" -X DELETE http://rudder.example.com/rudder/api/latest/rules/176ad06b-ed02-4da3-8053-16225d217741?prettify=true",
         "type": "json"
       }
     ],
@@ -1326,7 +1570,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"deleteRule\",\n        \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"changeRequestId\":\"47\",\n            \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n            \"displayName\":\"toto2\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\":\"deleteRule\",\n  \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n  \"result\":\"success\",\n  \"data\":{\n    \"rules\":[{\n      \"changeRequestId\":\"47\",\n      \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n      \"displayName\":\"toto2\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"directives\":[],\n      \"targets\":[],\n      \"enabled\":false,\n      \"system\":false\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1335,7 +1579,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "      HTTP/1.1 500\n      {\n        \"action\":\"deleteRule\",\n        \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n        \"result\":\"error\",\n        \"error details\":\"Could not delete Rule 176ad06b-ed02-4da3-8053-16225d217741 cause is: Could not find Rule 176ad06b-ed02-4da3-8053-16225d217741.\"\n      }",
+          "content": "HTTP/1.1 500\n{\n  \"action\":\"deleteRule\",\n  \"id\":\"176ad06b-ed02-4da3-8053-16225d217741\",\n  \"result\":\"error\",\n  \"error details\":\"Could not delete Rule 176ad06b-ed02-4da3-8053-16225d217741 cause is: Could not find Rule 176ad06b-ed02-4da3-8053-16225d217741.\"\n}",
           "type": "json"
         }
       ]
@@ -1367,7 +1611,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/rules?prettify=true",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/rules?prettify=true",
         "type": "json"
       }
     ],
@@ -1375,7 +1619,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"listRules\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n            \"displayName\":\"to\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[],\n            \"targets\":[],\n            \"enabled\":false,\n            \"system\":false\n          },{\n            \"id\":\"628abf7b-8b5c-4c44-8cca-437b636a9523\",\n            \"displayName\":\"My roule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"e61c0696-172b-46bb-80a9-d6f5ef1d2f85\"],\n            \"targets\":[\"special:all_exceptPolicyServers\"],\n            \"enabled\":true,\n            \"system\":false\n          },{\n            \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n            \"displayName\":\"My first Rule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"],\n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\":\"listRules\",\n  \"result\":\"success\",\n  \"data\":{\n    \"rules\":[{\n      \"id\":\"bb803bc8-2df7-4734-a6b6-454476c82bc6\",\n      \"displayName\":\"to\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"directives\":[],\n      \"targets\":[],\n      \"enabled\":false,\n      \"system\":false\n    },{\n      \"id\":\"628abf7b-8b5c-4c44-8cca-437b636a9523\",\n      \"displayName\":\"My roule\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"directives\":[\"e61c0696-172b-46bb-80a9-d6f5ef1d2f85\"],\n      \"targets\":[\"special:all_exceptPolicyServers\"],\n      \"enabled\":true,\n      \"system\":false\n    },{\n      \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n      \"displayName\":\"My first Rule\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"directives\":[\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n      \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"],\n      \"enabled\":false,\n      \"system\":false\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1394,7 +1638,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/rules/06ba8940-ed6c-4102-ba46-93d640a64c36?prettify=true",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET http://rudder.example.com/rudder/api/latest/rules/06ba8940-ed6c-4102-ba46-93d640a64c36?prettify=true",
         "type": "json"
       }
     ],
@@ -1402,7 +1646,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "      HTTP/1.1 200 OK\n      {\n        \"action\":\"ruleDetails\",\n        \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n        \"result\":\"success\",\n        \"data\":{\n          \"rules\":[{\n            \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n            \"displayName\":\"My first Rule\",\n            \"shortDescription\":\"\",\n            \"longDescription\":\"\",\n            \"directives\":[\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n            \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"], \n            \"enabled\":false,\n            \"system\":false\n          }]\n        }\n      }",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\":\"ruleDetails\",\n  \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n  \"result\":\"success\",\n  \"data\":{\n    \"rules\":[{\n      \"id\":\"06ba8940-ed6c-4102-ba46-93d640a64c36\",\n      \"displayName\":\"My first Rule\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"directives\":[\"cba93d24-8780-4308-b732-84995125562a\",\"7d44f9ad-9a54-4165-bb46-f66e6c674b39\",\"6847ad49-1c7e-4314-b764-ec176b882b6b\",\"19be05b2-fb68-4ae1-acc0-e0ad2eba71fd\",\"0be6fb7c-42c5-419e-9f6f-eb13ac4e4acd\"],\n      \"targets\":[\"group:3b9be575-590d-4fe4-9fa5-cc166d985ccf\"], \n      \"enabled\":false,\n      \"system\":false\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1493,7 +1737,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "    Update display name: \n    curl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/rules/RuleID -d \"displayName=Name of Rule\"",
+        "content": "Update display name: \ncurl -H \"X-API-Token: yourToken\" -X POST http://rudder.example.com/rudder/api/latest/rules/RuleID -d \"displayName=Name of Rule\"",
         "type": "json"
       }
     ],

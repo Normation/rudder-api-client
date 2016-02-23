@@ -19,7 +19,7 @@ class RudderError(requests.exceptions.RequestException):
       self.rudder_message = self.rudder_info['errorDetails']
     except ValueError:
       self.rudder_message = resp.text
-    super(RudderError, self).__init__(*args, **kwargs)
+    super(RudderError, self).__init__()
 
 
 class RudderEndPoint:
