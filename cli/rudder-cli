@@ -86,6 +86,12 @@ functions = {
 #                'delete': 'delete_parameter',
 #                'update': 'update_parameter',
 #            },
+        'compliances' : {
+                'rules': 'get_rules_compliance',
+                'rule': 'get_rule_compliance',
+                'nodes': 'get_nodes_compliance',
+                'node': 'get_node_compliance',
+            },
         }
 
 
@@ -237,9 +243,15 @@ if __name__ == "__main__":
 
   # options from command line
   args = docopt(update_doc(__doc__), argv=sys.argv[1:], options_first=True)
+
   clean_params(args)
   if 'api' in args:
     args2 = docopt(update_doc(__doc__), argv=sys.argv[1:])
+  elif 'compliance' in args or 'compliances' in args:
+    # subcommand options
+    objname = 'compliances'
+    argv = [ objname ] + args['<args>']
+    args2 = docopt(update_doc(__doc__, objname), argv=argv)
   else:
     # subcommand options
     objname = get_objname(args)
@@ -287,6 +299,15 @@ if __name__ == "__main__":
     method = conf["<method>"].lower()
     if method != 'get':
       conf['--json'] = '-'
+  elif 'compliances' in conf:
+    objname = 'compliances'
+    command = get_command(args, objname)
+    docstring = get_api_method(endpoint, objname, command).__doc__
+    match = re.search(r'\((\w+)\)', docstring)
+    if match:
+      method=match.group(1)
+    else:
+      method='get'
   else:
     objname = get_objname(args)
     command = get_command(args, objname)
