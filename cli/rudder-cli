@@ -78,14 +78,13 @@ functions = {
                 'decline': 'decline_change_request',
                 'update': 'update_change_request',
             },
-# TODO currently broken, uncommend when #6024 is resolved
-#        'parameters': {
-#                'list': 'list_parameters',
-#                'show': 'parameter_details',
-#                'create': 'create_parameter',
-#                'delete': 'delete_parameter',
-#                'update': 'update_parameter',
-#            },
+        'parameters': {
+                'list': 'list_parameters',
+                'show': 'parameter_details',
+                'create': 'create_parameter',
+                'delete': 'delete_parameter',
+                'update': 'update_parameter',
+            },
         'compliances' : {
                 'rules': 'get_rules_compliance',
                 'rule': 'get_rule_compliance',
