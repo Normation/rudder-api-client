@@ -56,6 +56,9 @@ class RudderEndPoint:
 
     # usefull for debug
     self.debug_query = json_data
+    self.debug_url = url
+    self.debug_method = method
+    self.debug_params = params
 
     # Do the call here
     self._res = self.session.request(method, url, params=change_info,
