@@ -2509,7 +2509,7 @@
   },
   {
     "type": "get",
-    "url": "api/compliance/nodes/{id}",
+    "url": "/api/compliance/nodes/{id}",
     "title": "4. Get Compliance details of a Node",
     "version": "7.0.0",
     "name": "getNodeCompliance",
@@ -2559,7 +2559,7 @@
   },
   {
     "type": "get",
-    "url": "api/compliance/nodes/{id}",
+    "url": "/api/compliance/nodes/{id}",
     "title": "4. Get Compliance details of a Node",
     "version": "6.0.0",
     "name": "getNodeCompliance",
@@ -2599,7 +2599,7 @@
   },
   {
     "type": "get",
-    "url": "api/compliance/nodes",
+    "url": "/api/compliance/nodes",
     "title": "3. Get all Nodes compliance",
     "version": "7.0.0",
     "name": "getNodesCompliance",
@@ -2640,7 +2640,7 @@
   },
   {
     "type": "get",
-    "url": "api/compliance/nodes",
+    "url": "/api/compliance/nodes",
     "title": "3. Get all Nodes compliance",
     "version": "6.0.0",
     "name": "getNodesCompliance",
