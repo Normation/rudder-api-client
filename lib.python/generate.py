@@ -74,6 +74,12 @@ def convert(name):
 if __name__ == "__main__":
   print('')
   for fct in data:
+    # this is a doc and not a real function
+    if fct['name'] == "Response_format_documentationApiNodesPendingApiNodesApiNodesNodeid":
+      continue
+    # this function has composite parameters that we cannot handle yet
+    if fct['name'] == "createDataSource":
+      continue
     generate(fct)
 
 

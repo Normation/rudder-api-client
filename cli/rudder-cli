@@ -37,7 +37,7 @@ import sys
 requests.packages.urllib3.disable_warnings()
 # Mapping between commands and api calls
 functions = {
-        'nodes' : {
+        'node' : {
                 'list': 'list_accepted_nodes',
                 'list_pending': 'list_pending_nodes',
                 'show': 'accepted_node_details',
@@ -46,7 +46,7 @@ functions = {
                 'refuse': [ 'change_node_status', { 'status': 'refused' } ],
                 'update_properties': 'update_node_properties',
             },
-        'groups' : {
+        'group' : {
                 'list': 'list_groups',
                 'show': 'group_details',
                 'create': 'create_group',
@@ -55,7 +55,13 @@ functions = {
                 'update': 'update_group',
                 'reload': 'reload_group',
             },
-        'rules' : {
+        'group-category' : {
+                'show': 'get_group_category_details',
+                'create': 'create_group_category',
+                'delete': 'delete_group_category',
+                'update': 'update_group_category',
+            },
+        'rule' : {
                 'list': 'list_rules',
                 'show': 'rule_details',
                 'create': 'create_rule',
@@ -63,7 +69,13 @@ functions = {
                 'delete': 'delete_rule',
                 'update': 'update_rule',
             },
-        'directives': {
+        'rule-category' : {
+                'show': 'get_rule_category_details',
+                'create': 'create_rule_category',
+                'delete': 'delete_rule_category',
+                'update': 'update_rule_category',
+            },
+        'directive': {
                 'list': 'list_directives',
                 'show': 'directive_details',
                 'create': 'create_directive',
@@ -71,25 +83,34 @@ functions = {
                 'delete': 'delete_directive',
                 'update': 'update_directive',
             },
-        'change-requests' : {
+        'change-request' : {
                 'list': 'list_change_requests',
                 'show': 'change_request_details',
                 'accept': 'accept_change_request',
                 'decline': 'decline_change_request',
                 'update': 'update_change_request',
             },
-        'parameters': {
+        'parameter': {
                 'list': 'list_parameters',
                 'show': 'parameter_details',
                 'create': 'create_parameter',
                 'delete': 'delete_parameter',
                 'update': 'update_parameter',
             },
-        'compliances' : {
+        'compliance' : {
                 'rules': 'get_rules_compliance',
                 'rule': 'get_rule_compliance',
                 'nodes': 'get_nodes_compliance',
                 'node': 'get_node_compliance',
+            },
+        'technique': {
+                'list': 'list_techniques',
+            },
+        'datasource': {
+                'list': 'get_all_data_sources',
+                'show': 'get_data_source',
+                'delete': 'delete_data_source',
+
             },
         }
 
@@ -147,8 +168,8 @@ def get_objname(args):
     if objname in args:
       if args[objname]:
         return objname
-    if objname[:-1] in args:
-      if args[objname[:-1]]: # try with the singular form
+    if plural(objname) in args:
+      if args[plural(objname)]: # try with the singular form
         return objname
   raise "BUG HERE" # should never happen since docopt handles this case
 
@@ -166,7 +187,7 @@ def get_command(args, objname):
 def get_api_method(endpoint, obj, command):
   method_name = None
   if obj not in functions: # try with the plural form
-      obj = obj + "s"
+    obj = plural(obj)
   if obj in functions:
     if command in functions[obj]:
       method_name = functions[obj][command]
@@ -177,6 +198,23 @@ def get_api_method(endpoint, obj, command):
   except AttributeError:
     print("Unknown function name: " + method_name)
     exit(3)
+
+
+# Get the singular form of a word
+def singular(word):
+  if word.endswith("ies"):
+    return word[0:-3] + "y"
+  elif word.endswith("s"):
+    return word[0:-1]
+  return word
+
+
+# Get the plural form of a word
+def plural(word):
+  if word.endswith("y"):
+    return word[0:-1] + "ies"
+  else:
+    return word + "s"
 
 
 # get all parameters of an api method from the library
@@ -210,8 +248,8 @@ def update_doc(doc, objname=None):
   subdoc = ""
   if objname is None:
     subdoc += "  rudder-cli api <method> <api_url> [options]\n"
-    for objname in functions:
-        subdoc += "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) <args>... [options]\n"
+    for objname in sorted(functions.keys()):
+      subdoc += "  rudder-cli ( " + objname + " | " + plural(objname) + " ) <args>... [options]\n"
   else:
     for command in functions[objname]:
       method = get_api_method(RudderEndPoint, objname, command)
@@ -224,7 +262,7 @@ def update_doc(doc, objname=None):
           if '--' + p in optional:
             optional.remove('--' + p)
       parameters = ["["+x+"=<value>]" for x in optional]
-      subdoc +=  "  rudder-cli ( " + objname[:-1] + " | " + objname + " ) " + command + " [options] " + " ".join(mandatory) + " " + " ".join(parameters) + "\n"
+      subdoc +=  "  rudder-cli ( " + objname + " | " + plural(objname) + " ) " + command + " [options] " + " ".join(mandatory) + " " + " ".join(parameters) + "\n"
   return re.sub(r'  rudder-cli <object> <command> \[options\]', subdoc, __doc__)
 
 
