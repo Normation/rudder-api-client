@@ -286,7 +286,7 @@ if __name__ == "__main__":
     args2 = docopt(update_doc(__doc__), argv=sys.argv[1:])
   elif 'compliance' in args or 'compliances' in args:
     # subcommand options
-    objname = 'compliances'
+    objname = 'compliance'
     argv = [ objname ] + args['<args>']
     args2 = docopt(update_doc(__doc__, objname), argv=argv)
   else:
