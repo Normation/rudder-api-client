@@ -44,7 +44,7 @@ functions = {
                 'delete': 'delete_node',
                 'accept': [ 'change_node_status', { 'status': 'accepted' } ],
                 'refuse': [ 'change_node_status', { 'status': 'refused' } ],
-                'update_properties': 'update_node_properties',
+                'update_properties': 'update_node',
             },
         'group' : {
                 'list': 'list_groups',
