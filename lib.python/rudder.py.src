@@ -1,8 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import json, requests
 import urllib3
-from pprint import pprint
 
 # exceptions to catch : ConnectionError HTTPError Timeout TooManyRedirects 
 #    or RequestException that encompass all of the above
