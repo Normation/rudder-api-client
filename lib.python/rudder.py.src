@@ -15,7 +15,10 @@ class RudderError(requests.exceptions.RequestException):
     resp = kwargs.get('response', None)
     try:
       self.rudder_info = json.loads(resp.text)
-      self.message = self.rudder_info['errorDetails']
+      if 'errorDetails' in self.rudder_info:
+        self.message = self.rudder_info['errorDetails']
+      elif 'error' in self.rudder_info:
+        self.message = self.rudder_info['error']
     except ValueError:
       self.message = resp.text
     super(RudderError, self).__init__()
@@ -70,11 +73,11 @@ class RudderEndPoint:
 
     # process returned data
     # self._res is used for debug / introspection purpose, do not rely on it
-    if self._res.status_code != 200:
+    if self._res.status_code not in [200, 201]:
       raise RudderError("Rudder returned code "+str(self._res.status_code),
                         response = self._res)
     status = self._res.json()
-    if status['result'] != "success":
+    if 'result' in status and status['result'] != "success":
       raise RudderError("Rudder did not return success",
                         response = self._res)
 
