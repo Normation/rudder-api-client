@@ -97,7 +97,8 @@ class RudderEndPoint:
 
 # Remove None values in a dictionary
 def clean_params(data):
-  for k in data.keys():
+  empty_keys = [k for k,v in data.items() if not v]
+  for k in empty_keys:
     if data[k] is None:
       del(data[k])
 
