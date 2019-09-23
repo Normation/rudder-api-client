@@ -3,7 +3,7 @@
     "type": "post",
     "url": "/api/changeRequests/{id}/accept",
     "title": "4. Accept a Change Request",
-    "version": "3.0.0",
+    "version": "10.0.0",
     "name": "acceptChangeRequest",
     "group": "Change_Requests",
     "parameter": {
@@ -51,7 +51,7 @@
     "type": "get",
     "url": "/api/changeRequests/{id}",
     "title": "2. Get a Change Request details",
-    "version": "3.0.0",
+    "version": "10.0.0",
     "name": "changeRequestDetails",
     "group": "Change_Requests",
     "examples": [
@@ -90,7 +90,7 @@
     "type": "delete",
     "url": "/api/changeRequests/{id}",
     "title": "3. Decline a Change Request",
-    "version": "3.0.0",
+    "version": "10.0.0",
     "name": "declineChangeRequest",
     "group": "Change_Requests",
     "examples": [
@@ -129,7 +129,7 @@
     "type": "get",
     "url": "/api/changeRequests",
     "title": "1. List all Changes Requests",
-    "version": "3.0.0",
+    "version": "10.0.0",
     "name": "listChangeRequests",
     "group": "Change_Requests",
     "parameter": {
@@ -169,7 +169,7 @@
     "type": "post",
     "url": "/api/changeRequests/{id}",
     "title": "5. Update a Change Request",
-    "version": "3.0.0",
+    "version": "10.0.0",
     "name": "updateChangeRequest",
     "group": "Change_Requests",
     "parameter": {
@@ -251,7 +251,7 @@
     "type": "get",
     "url": "/api/compliance/nodes/{id}",
     "title": "5. Get Compliance details of a Node",
-    "version": "7.0.0",
+    "version": "10.0.0",
     "name": "getNodeCompliance",
     "group": "Compliance",
     "description": "<p>Get compliance details of the Node passed as parameter</p>",
@@ -266,7 +266,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"nodes\": [\n      \"mode\": \"full-compliance\",\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"root\"\n    }\n  ]\n},\n\"result\": \"success\",\n\"action\": \"getNodeCompliance\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"nodes\": [\n      \"rules\": [{\n        \"compliance\": 0,\n        \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n      }],\n      \"mode\": \"full-compliance\",\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"root\"\n    }\n  ]\n},\n\"result\": \"success\",\n\"action\": \"getNodeCompliance\"\n}",
           "type": "json"
         }
       ]
@@ -299,56 +299,16 @@
   },
   {
     "type": "get",
-    "url": "/api/compliance/nodes/{id}",
-    "title": "5. Get Compliance details of a Node",
-    "version": "6.0.0",
-    "name": "getNodeCompliance",
-    "group": "Compliance",
-    "description": "<p>Get compliance details of the Node passed as parameter</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/nodes/root?prettify=true'",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"nodes\": [{\n      \"rules\": [{\n        \"directives\": [{\n          \"components\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"None\"\n            }],\n            \"complianceDetails\": {\n              \"noReport\": 100\n            },\n            \"compliance\": 0,\n            \"name\": \"ZMD process\"\n          }, {\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"complianceDetails\": {\n              \"noReport\": 100\n            },\n            \"compliance\": 0,\n            \"name\": \"RHEL/CentOS/SuSE packages\"\n          }, {\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"complianceDetails\": {\n              \"noReport\": 100\n            },\n            \"compliance\": 0,\n            \"name\": \"Post-modification hook\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"id\": \"3225efda-0ede-4de8-8b96-abb901fa86d8\"\n        }],\n        \"complianceDetails\": {\n          \"noReport\": 100\n        },\n        \"compliance\": 0,\n        \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n      }],\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"root\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getNodeCompliance\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/compliance.md",
-    "groupTitle": "Compliance",
-    "parameter": {
-      "fields": {
-        "URL parameters": [
-          {
-            "group": "URL parameters",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>ID of the Node.</p>"
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "get",
     "url": "/api/compliance/nodes",
     "title": "4. Get all Nodes compliance",
-    "version": "7.0.0",
+    "version": "10.0.0",
     "name": "getNodesCompliance",
     "group": "Compliance",
     "description": "<p>Get the compliance details of all Nodes</p>",
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'https://rudder.example.com/rudder/api/compliance/nodes?level=1&prettify=true'",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'https://rudder.example.com/rudder/api/compliance/nodes?level=2&prettify=true'",
         "type": "json"
       }
     ],
@@ -356,7 +316,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"nodes\": [{\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"root\"\n      \"mode\": full - compliance \",\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getNodesCompliance\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"nodes\": [{\n      \"rules\": [{\n        \"complianceDetails\": {\n          \"noReport\": 100\n        },\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"root\"\n      \"mode\": full - compliance \",\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getNodesCompliance\"\n}",
           "type": "json"
         }
       ]
@@ -380,43 +340,16 @@
   },
   {
     "type": "get",
-    "url": "/api/compliance/nodes",
-    "title": "4. Get all Nodes compliance",
-    "version": "6.0.0",
-    "name": "getNodesCompliance",
-    "group": "Compliance",
-    "description": "<p>Get the compliance details of all Nodes</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'https://rudder.example.com/rudder/api/latest/compliance/nodes?prettify=true'",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"nodes\": [{\n      \"rules\": [{\n        \"directives\": [{\n          \"components\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"None\"\n            }],\n            \"complianceDetails\": {\n              \"noReport\": 100\n            },\n            \"compliance\": 0,\n            \"name\": \"ZMD process\"\n          }, {\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"complianceDetails\": {\n              \"noReport\": 100\n            },\n            \"compliance\": 0,\n            \"name\": \"RHEL/CentOS/SuSE packages\"\n          }, {\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"complianceDetails\": {\n              \"noReport\": 100\n            },\n            \"compliance\": 0,\n            \"name\": \"Post-modification hook\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"id\": \"3225efda-0ede-4de8-8b96-abb901fa86d8\"\n        }],\n        \"complianceDetails\": {\n          \"noReport\": 100\n        },\n        \"compliance\": 0,\n        \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n      }],\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"root\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getNodesCompliance\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/compliance.md",
-    "groupTitle": "Compliance"
-  },
-  {
-    "type": "get",
     "url": "/api/compliance/rules/{id}",
     "title": "3. Get a Rule compliance details",
-    "version": "7.0.0",
+    "version": "10.0.0",
     "name": "getRuleCompliance",
     "group": "Compliance",
     "description": "<p>Get the compliance details of one Rule, whose ID is specified in the URL</p>",
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/rules/32377fd7-02fd-43d0-aab7-28460a91347b?level=1&prettify=true'",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/rules/32377fd7-02fd-43d0-aab7-28460a91347b?level=2&prettify=true'",
         "type": "json"
       }
     ],
@@ -424,7 +357,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"rules\": [{\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n      \"mode\": \"full-compliance\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getRuleCompliance\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"rules\": [{\n      \"directives\": [{\n        \"compliance\": 0,\n        \"id\": \"3225efda-0ede-4de8-8b96-abb901fa86d8\"\n      }],\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n      \"mode\": \"full-compliance\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getRuleCompliance\"\n}",
           "type": "json"
         }
       ]
@@ -457,56 +390,16 @@
   },
   {
     "type": "get",
-    "url": "/api/compliance/rules/{id}",
-    "title": "3. Get a Rule compliance details",
-    "version": "6.0.0",
-    "name": "getRuleCompliance",
-    "group": "Compliance",
-    "description": "<p>Get the compliance details of one Rule, whose ID is specified in the URL</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/rules/32377fd7-02fd-43d0-aab7-28460a91347b?prettify=true'",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"rules\": [{\n      \"directives\": [{\n        \"components\": [{\n          \"nodes\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"None\"\n            }],\n            \"id\": \"root\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"name\": \"ZMD process\"\n        }, {\n          \"nodes\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"id\": \"root\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"name\": \"RHEL/CentOS/SuSE packages\"\n        }, {\n          \"nodes\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"id\": \"root\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"name\": \"Post-modification hook\"\n        }],\n        \"complianceDetails\": {\n          \"noReport\": 100\n        },\n        \"compliance\": 0,\n        \"id\": \"3225efda-0ede-4de8-8b96-abb901fa86d8\"\n      }],\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getRuleCompliance\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/compliance.md",
-    "groupTitle": "Compliance",
-    "parameter": {
-      "fields": {
-        "URL parameters": [
-          {
-            "group": "URL parameters",
-            "type": "UUID",
-            "optional": false,
-            "field": "id",
-            "description": "<p>ID of the Rule</p>"
-          }
-        ]
-      }
-    }
-  },
-  {
-    "type": "get",
     "url": "/api/compliance/rules",
     "title": "2. Display compliance of all Rules",
-    "version": "7.0.0",
+    "version": "10.0.0",
     "name": "getRulesCompliance",
     "group": "Compliance",
     "description": "<p>Get compliance of all Rules available in Rudder</p>",
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/rules?level=1&prettify=true'",
+        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/rules?level=2&prettify=true'",
         "type": "json"
       }
     ],
@@ -514,7 +407,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"rules\": [{\n      \"mode\": \"full-compliance\",\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getRulesCompliance\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"rules\": [{\n      \"directives\": [{\n        \"compliance\": 0,\n        \"id\": \"3225efda-0ede-4de8-8b96-abb901fa86d8\"\n      }],\n      \"mode\": \"full-compliance\",\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getRulesCompliance\"\n}",
           "type": "json"
         }
       ]
@@ -535,39 +428,12 @@
         ]
       }
     }
-  },
-  {
-    "type": "get",
-    "url": "/api/compliance/rules",
-    "title": "2. Display compliance of all Rules",
-    "version": "6.0.0",
-    "name": "getRulesCompliance",
-    "group": "Compliance",
-    "description": "<p>Get compliance of all Rules available in Rudder</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X GET 'http://rudder.example.com/rudder/api/latest/compliance/rules?prettify=true'",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"data\": {\n    \"rules\": [{\n      \"directives\": [{\n        \"components\": [{\n          \"nodes\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"None\"\n            }],\n            \"id\": \"root\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"name\": \"ZMD process\"\n        }, {\n          \"nodes\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"id\": \"root\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"name\": \"RHEL/CentOS/SuSE packages\"\n        }, {\n          \"nodes\": [{\n            \"values\": [{\n              \"reports\": [{\n                \"status\": \"noReport\"\n              }],\n              \"value\": \"httpd\"\n            }],\n            \"id\": \"root\"\n          }],\n          \"complianceDetails\": {\n            \"noReport\": 100\n          },\n          \"compliance\": 0,\n          \"name\": \"Post-modification hook\"\n        }],\n        \"complianceDetails\": {\n          \"noReport\": 100\n        },\n        \"compliance\": 0,\n        \"id\": \"3225efda-0ede-4de8-8b96-abb901fa86d8\"\n      }],\n      \"mode\": \"full-compliance\",\n      \"complianceDetails\": {\n        \"noReport\": 100\n      },\n      \"compliance\": 0,\n      \"id\": \"32377fd7-02fd-43d0-aab7-28460a91347b\"\n    }]\n  },\n  \"result\": \"success\",\n  \"action\": \"getRulesCompliance\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/compliance.md",
-    "groupTitle": "Compliance"
   },
   {
     "type": "put",
     "url": "/api/datasources",
     "title": "3. Create a new Data Source",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "createDataSource",
     "group": "DataSources",
     "parameter": {
@@ -774,7 +640,7 @@
     "type": "delete",
     "url": "/api/datasources/{id}",
     "title": "5. Delete a DataSources",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "deleteDataSource",
     "group": "DataSources",
     "examples": [
@@ -811,9 +677,36 @@
   },
   {
     "type": "post",
+    "url": "/api/datasources/reload",
+    "title": "6. Update properties from data source - all nodes",
+    "version": "10.0.0",
+    "name": "fetchDataAllNodes",
+    "group": "DataSources",
+    "description": "<p>This API allows to trigger the update of properties coming from data sources for all nodes. The call is asynchrone.</p>",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/datasources/reload",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n\"action\": \"fetchDataAllNodes\",\n\"result\": \"success\",\n\"data\": \"Data for all nodes, for all configured data sources are going to be updated\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/datasources.md",
+    "groupTitle": "DataSources"
+  },
+  {
+    "type": "post",
     "url": "/api/datasources/reload/{datasourceId}",
     "title": "7. Update properties from data source with ID ${datasourceId} - all nodes",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "fetchDataAllNodes",
     "group": "DataSources",
     "description": "<p>This API allows to trigger the update of properties coming from data sources for all nodes. The call is asynchrone.</p>",
@@ -851,36 +744,9 @@
   },
   {
     "type": "post",
-    "url": "/api/datasources/reload",
-    "title": "6. Update properties from data source - all nodes",
-    "version": "4.0.0",
-    "name": "fetchDataAllNodes",
-    "group": "DataSources",
-    "description": "<p>This API allows to trigger the update of properties coming from data sources for all nodes. The call is asynchrone.</p>",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/datasources/reload",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n\"action\": \"fetchDataAllNodes\",\n\"result\": \"success\",\n\"data\": \"Data for all nodes, for all configured data sources are going to be updated\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/datasources.md",
-    "groupTitle": "DataSources"
-  },
-  {
-    "type": "post",
     "url": "/api/nodes/{id}/fetchData",
     "title": "8. Update properties from data source - node with ID ${nodeId}",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "fetchDataOneNode",
     "group": "DataSources",
     "description": "<p>This API allows to trigger the update of properties coming from data sources for that node. The call is asynchrone.</p>",
@@ -920,7 +786,7 @@
     "type": "post",
     "url": "/api/nodes/{id}/fetchData",
     "title": "9. Update properties from data source ${datasourceId} - node ${nodeId}",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "fetchDataOneNode",
     "group": "DataSources",
     "description": "<p>This API allows to trigger the update of properties coming from data source with ID ${datasourceId} for that node. The call is asynchrone.</p>",
@@ -960,7 +826,7 @@
     "type": "get",
     "url": "/api/datasources",
     "title": "1. List all DataSources",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "getAllDataSources",
     "group": "DataSources",
     "examples": [
@@ -986,7 +852,7 @@
     "type": "get",
     "url": "/api/datasources/{id}",
     "title": "2. Get a data sources details",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "getDataSource",
     "group": "DataSources",
     "examples": [
@@ -1025,7 +891,7 @@
     "type": "post",
     "url": "/api/datasources/{id}",
     "title": "4. Update a Data Source",
-    "version": "9.0.0",
+    "version": "10.0.0",
     "name": "updateDataSource",
     "group": "DataSources",
     "parameter": {
@@ -1078,7 +944,7 @@
     "type": "post",
     "url": "/api/directives/{id}/check",
     "title": "7. Check that update on a Directive is valid",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "checkDirective",
     "group": "Directives",
     "parameter": {
@@ -1132,6 +998,14 @@
             "optional": true,
             "field": "techniqueVersion",
             "description": "<p>Technique Version.</p>"
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "policyMode",
+            "defaultValue": "default",
+            "description": "<p>Policy mode to execute the directive with. Can be &quot;default&quot;, &quot;enforce&quot; or &quot;audit&quot;.</p>"
           }
         ],
         "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
@@ -1168,7 +1042,7 @@
     "type": "put",
     "url": "/api/directives",
     "title": "6. Clone a Directive",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "cloneDirective",
     "group": "Directives",
     "parameter": {
@@ -1240,6 +1114,14 @@
             "field": "techniqueVersion",
             "defaultValue": "same",
             "description": "<p>version as source] Define the technique version used. By default it will used the version of the cloned Directive</p>"
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "policyMode",
+            "defaultValue": "default",
+            "description": "<p>Policy mode to execute the directive with. Can be &quot;default&quot;, &quot;enforce&quot; or &quot;audit&quot;.</p>"
           }
         ],
         "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
@@ -1267,7 +1149,7 @@
     "type": "put",
     "url": "/api/directives",
     "title": "3. Create a new Directive",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "createDirective",
     "group": "Directives",
     "parameter": {
@@ -1330,7 +1212,7 @@
             "optional": true,
             "field": "techniqueVersion",
             "defaultValue": "latest",
-            "description": "<p>Technique version] In which version your tehcnique should be created.</p>"
+            "description": "<p>Technique version] In which version your technique should be created.</p>"
           },
           {
             "group": "Mono",
@@ -1338,6 +1220,14 @@
             "optional": true,
             "field": "priority",
             "description": "<p>Directive priority. Determines which value to use if there are several Directives based on the same technique applied to a Node.</p>"
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "policyMode",
+            "defaultValue": "default",
+            "description": "<p>Policy mode to execute the directive with. Can be &quot;default&quot;, &quot;enforce&quot; or &quot;audit&quot;.</p>"
           }
         ],
         "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
@@ -1359,7 +1249,7 @@
       },
       {
         "title": "directive.json details:",
-        "content": "{\n  \"id\": \"cf2a6c72-18ae-4f82-a12c-0b887792db41\",\n  \"displayName\": \"Example Directive\",\n  \"shortDescription\": \"This in an example Directive to use in Rudder api documentation\",\n  \"longDescription\": \"\",\n  \"techniqueName\": \"genericVariableDefinition\",\n  \"techniqueVersion\": \"2.0\",\n  \"tags\": {\n    \"env\" : \"production\",\n    \"country\" : \"FR\"\n  },\n  \"parameters\": {\n    \"section\": {\n      \"name\": \"sections\",\n      \"sections\": [\n        {\n          \"section\": {\n            \"name\": \"Variable definition\",\n            \"vars\": [\n              {\n                \"var\": {\n                  \"name\": \"GENERIC_VARIABLE_CONTENT\",\n                  \"value\": \"new variable content\"\n                }\n              },\n              {\n                \"var\": {\n                  \"name\": \"GENERIC_VARIABLE_NAME\",\n                  \"value\": \"new_variable\"\n                }\n              }\n            ]\n          }\n        }\n      ]\n    }\n  },\n  \"priority\": 3,\n  \"enabled\": true,\n  \"system\": false\n}",
+        "content": "{\n  \"id\": \"cf2a6c72-18ae-4f82-a12c-0b887792db41\",\n  \"displayName\": \"Example Directive\",\n  \"shortDescription\": \"This in an example Directive to use in Rudder api documentation\",\n  \"longDescription\": \"\",\n  \"techniqueName\": \"genericVariableDefinition\",\n  \"techniqueVersion\": \"2.0\",\n  \"tags\": {\n    \"env\" : \"production\",\n    \"country\" : \"FR\"\n  },\n  \"parameters\": {\n    \"section\": {\n      \"name\": \"sections\",\n      \"sections\": [\n        {\n          \"section\": {\n            \"name\": \"Variable definition\",\n            \"vars\": [\n              {\n                \"var\": {\n                  \"name\": \"GENERIC_VARIABLE_CONTENT\",\n                  \"value\": \"new variable content\"\n                }\n              },\n              {\n                \"var\": {\n                  \"name\": \"GENERIC_VARIABLE_NAME\",\n                  \"value\": \"new_variable\"\n                }\n              }\n            ]\n          }\n        }\n      ]\n    }\n  },\n  \"priority\": 3,\n  \"enabled\": true,\n  \"system\": false,\n  \"policyMode\": \"default\"\n}",
         "type": "json"
       }
     ],
@@ -1367,7 +1257,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"action\":\"createDirective\",\n  \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\": \"cf2a6c72-18ae-4f82-a12c-0b887792db41\",\n      \"displayName\": \"Example Directive\",\n      \"shortDescription\": \"This in an example Directive to use in Rudder api documentation\",\n      \"longDescription\": \"\",\n      \"techniqueName\": \"genericVariableDefinition\",\n      \"techniqueVersion\": \"2.0\",\n      \"tags\": {\n        \"env\" : \"production\",\n        \"country\" : \"FR\"\n      },\n      \"parameters\": {\n        \"section\": {\n          \"name\": \"sections\",\n          \"sections\": [\n            {\n              \"section\": {\n                \"name\": \"Variable definition\",\n                \"vars\": [\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_CONTENT\",\n                      \"value\": \"new variable content\"\n                    }\n                  },\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_NAME\",\n                      \"value\": \"new_variable\"\n                    }\n                  }\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"priority\": 3,\n      \"enabled\": true,\n      \"system\": false\n    }]\n  }\n}",
+          "content": "{\n  \"action\":\"createDirective\",\n  \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\": \"cf2a6c72-18ae-4f82-a12c-0b887792db41\",\n      \"displayName\": \"Example Directive\",\n      \"shortDescription\": \"This in an example Directive to use in Rudder api documentation\",\n      \"longDescription\": \"\",\n      \"techniqueName\": \"genericVariableDefinition\",\n      \"techniqueVersion\": \"2.0\",\n      \"tags\": {\n        \"env\" : \"production\",\n        \"country\" : \"FR\"\n      },\n      \"parameters\": {\n        \"section\": {\n          \"name\": \"sections\",\n          \"sections\": [\n            {\n              \"section\": {\n                \"name\": \"Variable definition\",\n                \"vars\": [\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_CONTENT\",\n                      \"value\": \"new variable content\"\n                    }\n                  },\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_NAME\",\n                      \"value\": \"new_variable\"\n                    }\n                  }\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"priority\": 3,\n      \"enabled\": true,\n      \"system\": false,\n      \"policyMode\": \"default\"\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1379,7 +1269,7 @@
     "type": "delete",
     "url": "/api/directives/{id}",
     "title": "5. Delete a Directive",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "deleteDirective",
     "group": "Directives",
     "examples": [
@@ -1409,7 +1299,7 @@
     "type": "get",
     "url": "/api/directives/{id}",
     "title": "2. Get a Directive details",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "directiveDetails",
     "group": "Directives",
     "examples": [
@@ -1439,7 +1329,7 @@
     "type": "get",
     "url": "/api/directives",
     "title": "1. List all Directives",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "listDirectives",
     "group": "Directives",
     "examples": [
@@ -1453,7 +1343,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"action\":\"listDirectives\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\":\"3877d1c3-d9e6-43cb-aa9d-40961510a34a\",\n      \"displayName\":\"Copy test file shared folder\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\\n    this is a looooooooooooooooonnnnnnnnnn\\n\\n\\nggggggggggggggggg description !!\\\"\\\"\\\"\\\"\\\"\\\"\\n  \",\n      \"techniqueName\":\"copyGitFile\",\n      \"techniqueVersion\":\"1.3\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"Copy file and PostHook\",\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"Copy file\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_COMPARE_METHOD\",\n                      \"value\":\"mtime\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_DESTINATION\",\n                      \"value\":\"/tmp/test2\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_GROUP\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_NAME\",\n                      \"value\":\"/tmp/test\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_OWNER\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_RECURSION\",\n                      \"value\":\"0\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"enabled\":true,\n      \"system\":false\n    },{\n      \"id\":\"e61c0696-172b-46bb-80a9-d6f5ef1d2f85\",\n      \"displayName\":\"test local_copy\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"techniqueName\":\"fileManagement\",\n      \"techniqueVersion\":\"2.0\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"File to manage\",\n              \"vars\":[{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_ACTION\",\n                  \"value\":\"copy\"\n                }\n              },{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_SOURCE\",\n                  \"value\":\"/vagrant/node.sh\"\n                }\n              },{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_SYMLINK_ENFORCE\",\n                  \"value\":\"false\"\n                }\n              }],\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"File\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_PATH\",\n                      \"value\":\"/root/test\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"File cleaning options\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_DAYS\",\n                      \"value\":\"0\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_OPTION\",\n                      \"value\":\"none\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_PATTERN\",\n                      \"value\":\".*\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Permissions\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_CHECK_PERMISSIONS\",\n                      \"value\":\"false\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_GROUP\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_OWNER\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_RECURSIVE\",\n                      \"value\":\"1\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"enabled\":true,\n      \"system\":false\n    }]\n  }\n}",
+          "content": "{\n  \"action\":\"listDirectives\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\":\"3877d1c3-d9e6-43cb-aa9d-40961510a34a\",\n      \"displayName\":\"Copy test file shared folder\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\\n    this is a looooooooooooooooonnnnnnnnnn\\n\\n\\nggggggggggggggggg description !!\\\"\\\"\\\"\\\"\\\"\\\"\\n  \",\n      \"techniqueName\":\"copyGitFile\",\n      \"techniqueVersion\":\"1.3\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"Copy file and PostHook\",\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"Copy file\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_COMPARE_METHOD\",\n                      \"value\":\"mtime\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_DESTINATION\",\n                      \"value\":\"/tmp/test2\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_GROUP\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_NAME\",\n                      \"value\":\"/tmp/test\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_OWNER\",\n                      \"value\":\"root\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_RECURSION\",\n                      \"value\":\"0\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"COPYFILE_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"enabled\":true,\n      \"system\":false,\n      \"policyMode\": \"default\",\n      \"tags\": []\n    },{\n      \"id\":\"e61c0696-172b-46bb-80a9-d6f5ef1d2f85\",\n      \"displayName\":\"test local_copy\",\n      \"shortDescription\":\"\",\n      \"longDescription\":\"\",\n      \"techniqueName\":\"fileManagement\",\n      \"techniqueVersion\":\"2.0\",\n      \"parameters\":{\n        \"section\":{\n          \"name\":\"sections\",\n          \"sections\":[{\n            \"section\":{\n              \"name\":\"File to manage\",\n              \"vars\":[{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_ACTION\",\n                  \"value\":\"copy\"\n                }\n              },{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_SOURCE\",\n                  \"value\":\"/vagrant/node.sh\"\n                }\n              },{\n                \"var\":{\n                  \"name\":\"FILE_AND_FOLDER_MANAGEMENT_SYMLINK_ENFORCE\",\n                  \"value\":\"false\"\n                }\n              }],\n              \"sections\":[{\n                \"section\":{\n                  \"name\":\"File\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_PATH\",\n                      \"value\":\"/root/test\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"File cleaning options\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_DAYS\",\n                      \"value\":\"0\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_OPTION\",\n                      \"value\":\"none\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_DELETION_PATTERN\",\n                      \"value\":\".*\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Permissions\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_CHECK_PERMISSIONS\",\n                      \"value\":\"false\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_GROUP\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_OWNER\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_PERM\",\n                      \"value\":\"000\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_RECURSIVE\",\n                      \"value\":\"1\"\n                    }\n                  }]\n                }\n              },{\n                \"section\":{\n                  \"name\":\"Post-modification hook\",\n                  \"vars\":[{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_POST_HOOK_COMMAND\",\n                      \"value\":\"\"\n                    }\n                  },{\n                    \"var\":{\n                      \"name\":\"FILE_AND_FOLDER_MANAGEMENT_POST_HOOK_RUN\",\n                      \"value\":\"false\"\n                    }\n                  }]\n                }\n              }]\n            }\n          }]\n        }\n      },\n      \"priority\":5,\n      \"enabled\":true,\n      \"system\":false,\n      \"policyMode\": \"default\",\n      \"tags\": []\n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1465,7 +1355,7 @@
     "type": "post",
     "url": "/api/directives/{id}",
     "title": "4. Update a Directive",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "updateDirective",
     "group": "Directives",
     "parameter": {
@@ -1519,6 +1409,14 @@
             "optional": true,
             "field": "techniqueVersion",
             "description": "<p>Technique Version.</p>"
+          },
+          {
+            "group": "Mono",
+            "type": "String",
+            "optional": true,
+            "field": "policyMode",
+            "defaultValue": "default",
+            "description": "<p>Policy mode to execute the directive with. Can be &quot;default&quot;, &quot;enforce&quot; or &quot;audit&quot;.</p>"
           }
         ],
         "Multi valued parameters - Those parameters need to be entered several times, they will add each other to form a list.": [
@@ -1557,7 +1455,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "{\n  \"action\":\"createDirective\",\n  \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\": \"cf2a6c72-18ae-4f82-a12c-0b887792db41\",\n      \"displayName\": \"Example Directive\",\n      \"shortDescription\": \"This in an example Directive to use in Rudder api documentation\",\n      \"longDescription\": \"Add a loooooooooooong description\",\n      \"techniqueName\": \"genericVariableDefinition\",\n      \"techniqueVersion\": \"2.0\",\n      \"tags\": {\n        \"env\" : \"production\",\n        \"country\" : \"FR\"\n      },\n      \"parameters\": {\n        \"section\": {\n          \"name\": \"sections\",\n          \"sections\": [\n            {\n              \"section\": {\n                \"name\": \"Variable definition\",\n                \"vars\": [\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_CONTENT\",\n                      \"value\": \"Change Variable Content\"\n                    }\n                  },\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_NAME\",\n                      \"value\": \"new_variable\"\n                    }\n                  }\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"priority\": 5,\n      \"enabled\": true,\n      \"system\": false\n     \n    }]\n  }\n}",
+          "content": "{\n  \"action\":\"createDirective\",\n  \"id\":\"7fb1349e-1f2c-4fca-9c5a-e5858a5b132e\",\n  \"result\":\"success\",\n  \"data\":{\n    \"directives\":[{\n      \"id\": \"cf2a6c72-18ae-4f82-a12c-0b887792db41\",\n      \"displayName\": \"Example Directive\",\n      \"shortDescription\": \"This in an example Directive to use in Rudder api documentation\",\n      \"longDescription\": \"Add a loooooooooooong description\",\n      \"techniqueName\": \"genericVariableDefinition\",\n      \"techniqueVersion\": \"2.0\",\n      \"tags\": {\n        \"env\" : \"production\",\n        \"country\" : \"FR\"\n      },\n      \"parameters\": {\n        \"section\": {\n          \"name\": \"sections\",\n          \"sections\": [\n            {\n              \"section\": {\n                \"name\": \"Variable definition\",\n                \"vars\": [\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_CONTENT\",\n                      \"value\": \"Change Variable Content\"\n                    }\n                  },\n                  {\n                    \"var\": {\n                      \"name\": \"GENERIC_VARIABLE_NAME\",\n                      \"value\": \"new_variable\"\n                    }\n                  }\n                ]\n              }\n            }\n          ]\n        }\n      },\n      \"priority\": 5,\n      \"enabled\": true,\n      \"system\": false,\n      \"policyMode\": \"default\"\n     \n    }]\n  }\n}",
           "type": "json"
         }
       ]
@@ -1569,7 +1467,7 @@
     "type": "get",
     "url": "/api/groups/tree",
     "title": "8. Get Groups tree",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "GetGroupTree",
     "group": "Groups",
     "description": "<p>Get all Groups available in Rudder and their cateogries in a Tree</p>",
@@ -1596,7 +1494,7 @@
     "type": "put",
     "url": "/api/groups",
     "title": "7. Clone a Group",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "cloneGroup",
     "group": "Groups",
     "parameter": {
@@ -1671,7 +1569,7 @@
     "type": "put",
     "url": "/api/groups",
     "title": "3. Create a new Group",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "createGroup",
     "group": "Groups",
     "parameter": {
@@ -1751,7 +1649,7 @@
     "type": "put",
     "url": "/api/groups/categories",
     "title": "12. Create a new Group category.",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "createGroupCategory",
     "group": "Groups",
     "description": "<p>Create a new Group category in Rudder. You can define all of its parameters, but you need at least its name</p>",
@@ -1805,7 +1703,7 @@
     "type": "delete",
     "url": "/api/groups/{id}",
     "title": "6. Delete a Group",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "deleteGroup",
     "group": "Groups",
     "examples": [
@@ -1835,7 +1733,7 @@
     "type": "get",
     "url": "/api/groups/categories/{id}",
     "title": "10. Delete a Group category",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "deleteGroupCategory",
     "group": "Groups",
     "description": "<p>Delete a Group category. It must have no child groups and no children categories</p>",
@@ -1875,7 +1773,7 @@
     "type": "get",
     "url": "/api/groups/categories/{id}",
     "title": "9. Get a Group category details",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "getGroupCategoryDetails",
     "group": "Groups",
     "description": "<p>Get the details of a Group category, whose ID is specified in the URL</p>",
@@ -1915,7 +1813,7 @@
     "type": "get",
     "url": "/api/groups/{id}",
     "title": "2. Get Group details",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "groupDetails",
     "group": "Groups",
     "examples": [
@@ -1945,7 +1843,7 @@
     "type": "get",
     "url": "/api/groups",
     "title": "1. List all Groups",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "listGroups",
     "group": "Groups",
     "examples": [
@@ -1962,7 +1860,7 @@
     "type": "post",
     "url": "/api/groups/{id}/reload",
     "title": "5. Reload a Group",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "reloadGroup",
     "group": "Groups",
     "filename": "src/api_v2/groups.md",
@@ -1985,7 +1883,7 @@
     "type": "post",
     "url": "/api/groups/{id}",
     "title": "4. Update a Group",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "updateGroup",
     "group": "Groups",
     "parameter": {
@@ -2052,7 +1950,7 @@
     "type": "post",
     "url": "/api/groups/categories/{id}",
     "title": "11. Update a Group Category",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "updateGroupCategory",
     "group": "Groups",
     "description": "<p>Modify any parameters of a Group category. Missing parameters means to not modify that parameter</p>",
@@ -2115,7 +2013,7 @@
     "type": "Response format documentation",
     "url": "/api/nodes/pending,/api/nodes,/api/nodes/{nodeId}",
     "title": "0. Node information format",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "group": "Nodes",
     "description": "<p>Here, we are describing all the available properties on node details on each of the three level: minimal, default and full. As explain in documentation for the &quot;include&quot; parameters in relevants API call, you can also specify the list of included first level properties you want to get.</p> <p>A value is returned <em>only</em> if it is defined for the node. For example, &quot;license&quot; are rarelly defined for Linux software and so software won't have that data.</p>",
     "parameter": {
@@ -2164,6 +2062,13 @@
             "optional": false,
             "field": "ipAddresses",
             "description": "<p>Array of all IPs (v4 and v6) for the node</p>"
+          },
+          {
+            "group": "IncludeDefault",
+            "type": "String",
+            "optional": true,
+            "field": "lastRunDate",
+            "description": "<p>(Rudder 5.0.9 and up) Date and time (yyyy-MM-dd HH:mm) of the last run, if one is available (node time)</p>"
           },
           {
             "group": "IncludeDefault",
@@ -3228,7 +3133,7 @@
     "type": "get",
     "url": "/api/nodes/{id}",
     "title": "4. Get Node details",
-    "version": "4.0.0",
+    "version": "10.0.0",
     "name": "acceptedNodeDetails",
     "group": "Nodes",
     "parameter": {
@@ -3275,9 +3180,9 @@
   },
   {
     "type": "post",
-    "url": "/api/nodes/{id}",
+    "url": "/api/nodes/{id}/applyPolicy",
     "title": "8. Trigger an agent run",
-    "version": "8.0.0",
+    "version": "10.0.0",
     "name": "applyPolicy",
     "group": "Nodes",
     "parameter": {
@@ -3313,8 +3218,8 @@
     "success": {
       "examples": [
         {
-          "title": "Rudder agent 4.1.0~alpha1~git201701101529-jessie0 (CFEngine Core 3.10.0)",
-          "content": "Rudder agent 4.1.0~alpha1~git201701101529-jessie0 (CFEngine Core 3.10.0)\nNode uuid: root\nStart execution with config [20170110-161552-3325af7a]\n\nM| State         Technique                 Component                 Key                Message\nE| compliant     Common                    Update                                       Rudder ncf instance already up to date on this root server. No action required.\nE| compliant     Common                    ncf Initialization                           The ncf initialization was correct\nE| compliant     Common                    Security parameters                          The internal environment security is acceptable\nE| compliant     Common                    Red Button                                   Red Button is not in effect, continuing as normal...\nE| n/a           Common                    Process checking                             CFEngine proccesses check is done by the rudder-agent CRON job\nE| compliant     Common                    CRON Daemon                                  Cron daemon status was correct\nE| compliant     Common                    Log system for reports                       Logging system for report centralization is already correctly configured\nE| compliant     Common                    Binaries update                              The CFEngine binaries in /var/rudder/cfengine-community/bin are up to date\nE| compliant     DistributePolicy          Configure ncf                                Configure ncf was correct\nE| compliant     DistributePolicy          Propagate promises                           All files have been propagated\nE| compliant     DistributePolicy          Send inventories to CMDB                     No inventory to send\nE| compliant     Inventory                 inventory                                    Next inventory scheduled between 00:00 and 06:00\nE| compliant     server-roles              Check logrotate configur|                    The logrotate configuration is correct\nE| compliant     server-roles              Check LDAP in rudder-web|                    The Rudder Webapp configuration files are OK (checked LDAP password)\nE| compliant     server-roles              Check LDAP credentials                       The OpenLDAP configuration file is OK (checked rootdn password)\nE| compliant     server-roles              Check SQL in rudder-weba|                    The Rudder Webapp configuration files are OK (checked SQL password)\nE| compliant     server-roles              Check SQL credentials                        The Rudder PostgreSQL user account's password is correct and works\nE| compliant     server-roles              Check rudder-passwords.c|                    The Rudder passwords file is present and secure\nE| compliant     server-roles              Check allowed networks c|                    The Rudder allowed networks configuration is OK\nE| compliant     server-roles              Check WebDAV credentials                     The Rudder WebDAV user and password are OK\nE| compliant     server-roles              Check apache process                         Check apache process running was correct\nE| compliant     server-roles              Check apache boot script                     Check apache boot starting parameters was correct\nE| compliant     server-roles              Check jetty process                          Check jetty process running was correct\nE| compliant     server-roles              Check configuration-repo|                    The /var/rudder/configuration-repository directory is present\nE| compliant     server-roles              Check configuration-repo|                    The /var/rudder/configuration-repository GIT lock file is not present or not older than 5 minutes\nE| compliant     server-roles              Check rudder status                          The http://localhost:8080/rudder/api/status web application is running\nE| compliant     server-roles              Check endpoint status                        The http://localhost:8080/endpoint/api/status web application is running\nE| compliant     server-roles              Check slapd process                          Check slapd process running was correct\nE| compliant     server-roles              Check PostgreSQL configu|                    There is no need of specific postgresql configuration on this system\nE| compliant     server-roles              Check postgresql process                     Check postgresql process running was correct\nE| compliant     server-roles              Check postgresql boot sc|                    Check postgresql boot starting parameters was correct\nE| n/a           server-roles              Send metrics to rudder-p|                    Sending metrics to rudder-project is not enabled. Skipping.\n\n## Summary #####################################################################\n32 components verified in 4 directives\n   => 32 components in Enforce mode\n         -> 30 compliant\n               -> 2 not-applicable\n               execution time: 2.39s\n################################################################################",
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n\nRudder agent 4.1.0~alpha1~git201701101529-jessie0 (CFEngine Core 3.10.0)\nNode uuid: root\nStart execution with config [20170110-161552-3325af7a]\n\nM| State         Technique                 Component                 Key                Message\nE| compliant     Common                    Update                                       Rudder ncf instance already up to date on this root server. No action required.\nE| compliant     Common                    ncf Initialization                           The ncf initialization was correct\nE| compliant     Common                    Security parameters                          The internal environment security is acceptable\nE| compliant     Common                    Red Button                                   Red Button is not in effect, continuing as normal...\nE| n/a           Common                    Process checking                             CFEngine proccesses check is done by the rudder-agent CRON job\nE| compliant     Common                    CRON Daemon                                  Cron daemon status was correct\nE| compliant     Common                    Log system for reports                       Logging system for report centralization is already correctly configured\nE| compliant     Common                    Binaries update                              The CFEngine binaries in /var/rudder/cfengine-community/bin are up to date\nE| compliant     DistributePolicy          Configure ncf                                Configure ncf was correct\nE| compliant     DistributePolicy          Propagate promises                           All files have been propagated\nE| compliant     DistributePolicy          Send inventories to CMDB                     No inventory to send\nE| compliant     Inventory                 inventory                                    Next inventory scheduled between 00:00 and 06:00\nE| compliant     server-roles              Check logrotate configur|                    The logrotate configuration is correct\nE| compliant     server-roles              Check LDAP in rudder-web|                    The Rudder Webapp configuration files are OK (checked LDAP password)\nE| compliant     server-roles              Check LDAP credentials                       The OpenLDAP configuration file is OK (checked rootdn password)\nE| compliant     server-roles              Check SQL in rudder-weba|                    The Rudder Webapp configuration files are OK (checked SQL password)\nE| compliant     server-roles              Check SQL credentials                        The Rudder PostgreSQL user account's password is correct and works\nE| compliant     server-roles              Check rudder-passwords.c|                    The Rudder passwords file is present and secure\nE| compliant     server-roles              Check allowed networks c|                    The Rudder allowed networks configuration is OK\nE| compliant     server-roles              Check WebDAV credentials                     The Rudder WebDAV user and password are OK\nE| compliant     server-roles              Check apache process                         Check apache process running was correct\nE| compliant     server-roles              Check apache boot script                     Check apache boot starting parameters was correct\nE| compliant     server-roles              Check jetty process                          Check jetty process running was correct\nE| compliant     server-roles              Check configuration-repo|                    The /var/rudder/configuration-repository directory is present\nE| compliant     server-roles              Check configuration-repo|                    The /var/rudder/configuration-repository GIT lock file is not present or not older than 5 minutes\nE| compliant     server-roles              Check rudder status                          The http://localhost:8080/rudder/api/status web application is running\nE| compliant     server-roles              Check endpoint status                        The http://localhost:8080/endpoint/api/status web application is running\nE| compliant     server-roles              Check slapd process                          Check slapd process running was correct\nE| compliant     server-roles              Check PostgreSQL configu|                    There is no need of specific postgresql configuration on this system\nE| compliant     server-roles              Check postgresql process                     Check postgresql process running was correct\nE| compliant     server-roles              Check postgresql boot sc|                    Check postgresql boot starting parameters was correct\nE| n/a           server-roles              Send metrics to rudder-p|                    Sending metrics to rudder-project is not enabled. Skipping.\n\n## Summary #####################################################################\n32 components verified in 4 directives\n   => 32 components in Enforce mode\n         -> 30 compliant\n               -> 2 not-applicable\n               execution time: 2.39s\n################################################################################",
           "type": "json"
         }
       ]
@@ -3324,9 +3229,9 @@
   },
   {
     "type": "post",
-    "url": "/api/nodes/{id}",
+    "url": "/api/nodes/applyPolicy",
     "title": "7. Trigger all agent run",
-    "version": "8.0.0",
+    "version": "10.0.0",
     "name": "applyPolicyAllNodes",
     "group": "Nodes",
     "parameter": {
@@ -3353,8 +3258,8 @@
     "success": {
       "examples": [
         {
-          "title": "{",
-          "content": "{\n  \"action\": \"applyPolicyAllNodes\",\n  \"result\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"edd9a756-ac7e-4820-8e75-83225ebcabec\",\n      \"hostname\": \"relay.rudder.local\",\n      \"result\": \"Started\"\n    },\n    {\n      \"id\": \"root\",\n      \"hostname\": \"server.rudder.local\",\n      \"result\": \"Started\"\n    }\n  ]\n}",
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"applyPolicyAllNodes\",\n  \"result\": \"success\",\n  \"data\": [\n    {\n      \"id\": \"edd9a756-ac7e-4820-8e75-83225ebcabec\",\n      \"hostname\": \"relay.rudder.local\",\n      \"result\": \"Started\"\n    },\n    {\n      \"id\": \"root\",\n      \"hostname\": \"server.rudder.local\",\n      \"result\": \"Started\"\n    }\n  ]\n}",
           "type": "json"
         }
       ]
@@ -3366,7 +3271,7 @@
     "type": "post",
     "url": "/api/nodes/pending/{id}",
     "title": "5. Change pending Node status",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "changeNodeStatus",
     "group": "Nodes",
     "parameter": {
@@ -3405,7 +3310,7 @@
     "type": "delete",
     "url": "/api/nodes/{id}",
     "title": "7. Delete Node",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "deleteNode",
     "group": "Nodes",
     "examples": [
@@ -3453,7 +3358,7 @@
     "type": "get",
     "url": "/api/nodes",
     "title": "1. List accepted Nodes",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "listAcceptedNodes",
     "group": "Nodes",
     "description": "<p>That function allow you to get details of accepted Nodes. You can make query on those Nodes based on inventory criterion. You can use the same queries than those used in NodeGroup queries</p>",
@@ -3534,35 +3439,9 @@
   },
   {
     "type": "get",
-    "url": "/api/nodes",
-    "title": "1. List accepted Nodes",
-    "version": "2.0.0",
-    "name": "listAcceptedNodes",
-    "group": "Nodes",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"listAcceptedNodes\",\n  \"result\": \"success\",\n  \"data\": {\n    \"nodes\": [\n      {\n        \"id\": \"f5ebcc89-fd10-4d0d-8e58-58f4634a99b9\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node2.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"d22d59ce-ce56-4e61-913c-2643681289d3\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node4.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"d348e50e-07a9-4475-b798-3dadc1b01b14\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node3.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"18e56738-f390-470a-a048-81833ff50dda\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node5\",\n        \"osName\": \"Debian\",\n        \"osVersion\": \"7.0\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"root\",\n        \"status\": \"accepted\",\n        \"hostname\": \"server\",\n        \"osName\": \"Debian\",\n        \"osVersion\": \"7.0\",\n        \"machineType\": \"Virtual\"\n      },\n      {\n        \"id\": \"332c238d-65aa-4b4b-bd1b-a89749693f61\",\n        \"status\": \"accepted\",\n        \"hostname\": \"node1.rudder.local\",\n        \"osName\": \"Centos\",\n        \"osVersion\": \"6.3\",\n        \"machineType\": \"Virtual\"\n      }\n    ]\n  }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/nodes.md",
-    "groupTitle": "Nodes"
-  },
-  {
-    "type": "get",
     "url": "/api/nodes/pending",
     "title": "2. List pending Nodes",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "listPendingNodes",
     "group": "Nodes",
     "parameter": {
@@ -3599,36 +3478,10 @@
     "groupTitle": "Nodes"
   },
   {
-    "type": "get",
-    "url": "/api/nodes/pending",
-    "title": "2. List pending Nodes",
-    "version": "2.0.0",
-    "name": "listPendingNodes",
-    "group": "Nodes",
-    "examples": [
-      {
-        "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/nodes/pending",
-        "type": "json"
-      }
-    ],
-    "success": {
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"listPendingNodes\",\n  \"result\": \"success\",\n  \"data\": {\n    \"nodes\": [\n      {\n        \"id\": \"7b13f54f-7ab6-4a45-ada7-9049039b87ca\",\n        \"status\": \"pending\",\n        \"hostname\": \"node5\",\n        \"osName\": \"Debian\"\n      },\n      {\n        \"id\": \"80ade5bf-aed9-4f57-8beb-aaaf3e63ec04\",\n        \"status\": \"pending\",\n        \"hostname\": \"node6\",\n        \"osName\": \"Ubuntu\"\n      }\n    ]\n  }\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "filename": "src/api_v2/nodes.md",
-    "groupTitle": "Nodes"
-  },
-  {
     "type": "post",
     "url": "/api/nodes/{id}",
-    "title": "5. Update Node settings",
-    "version": "8.0.0",
+    "title": "6. Update Node settings and properties",
+    "version": "12.0.0",
     "name": "updateNode",
     "group": "Nodes",
     "parameter": {
@@ -3639,7 +3492,7 @@
             "type": "Property",
             "optional": false,
             "field": "properties",
-            "description": "<p>A property of the Node defined by its name and its value. Value are non-empty UTF-8 strings. Setting a key to the empty string removes it from the list of properties for that node.</p>"
+            "description": "<p>A property of the Node defined by its name and its value. Values are non-empty UTF-8 strings. Setting a key to the empty string removes it from the list of properties for that node.</p>"
           }
         ],
         "Parameter": [
@@ -3648,7 +3501,21 @@
             "type": "PolicyMode",
             "optional": false,
             "field": "policy",
-            "description": "<p>In which mode the node will apply its configuration policy. You can choose between &quot;audit&quot; and &quot;enfoce&quot; modes, or &quot;default&quot; to use the global mode</p>"
+            "description": "<p>In which mode the node will apply its configuration policy. You can choose between &quot;audit&quot; and &quot;enforce&quot; modes, or &quot;default&quot; to use the global mode</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "State",
+            "optional": false,
+            "field": "state",
+            "description": "<p>The node lifecycle state. You can choose between &quot;enabled&quot;, &quot;ignored&quot;, &quot;empty-policies&quot;, &quot;initializing&quot;, and &quot;preparing-eol&quot; state. See https://docs.rudder.io/reference/current/usage/advanced_node_management.html#node-lifecycle for more information.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "JSON",
+            "optional": false,
+            "field": "agentKey",
+            "description": "<p>The agent key, dict containing two keys: &quot;status&quot; (optional, can be &quot;certified&quot; or &quot;undefined&quot;) and &quot;value&quot; (optional, in PEM format (either certificate or public key)).</p>"
           }
         ],
         "URL parameters": [
@@ -3710,8 +3577,8 @@
   {
     "type": "post",
     "url": "/api/nodes/{id}",
-    "title": "6. Set Node properties",
-    "version": "5.0.0",
+    "title": "6. Update Node settings and properties",
+    "version": "10.0.0",
     "name": "updateNode",
     "group": "Nodes",
     "parameter": {
@@ -3722,7 +3589,23 @@
             "type": "Property",
             "optional": false,
             "field": "properties",
-            "description": "<p>A property of the Node defined by its name and its value.</p>"
+            "description": "<p>A property of the Node defined by its name and its value. Values are non-empty UTF-8 strings. Setting a key to the empty string removes it from the list of properties for that node.</p>"
+          }
+        ],
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "PolicyMode",
+            "optional": false,
+            "field": "policy",
+            "description": "<p>In which mode the node will apply its configuration policy. You can choose between &quot;audit&quot; and &quot;enforce&quot; modes, or &quot;default&quot; to use the global mode</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "State",
+            "optional": false,
+            "field": "state",
+            "description": "<p>The node lifecycle state. You can choose between &quot;enabled&quot;, &quot;ignored&quot;, &quot;empty-policies&quot;, &quot;initializing&quot;, and &quot;preparing-eol&quot; state. See https://docs.rudder.io/reference/current/usage/advanced_node_management.html#node-lifecycle for more information.</p>"
           }
         ],
         "URL parameters": [
@@ -3736,34 +3619,44 @@
         ]
       }
     },
-    "description": "<p>This API allows to set &quot;key=value&quot; properties in node. This properties are then returned in the node details under the &quot;properties&quot; key, and they can be used to define group. Value are non-empty UTF-8 strings. Setting a key to the empty string removes it from the list of properties for that node.</p>",
+    "description": "<p>This API allows to update the node settings.</p>",
     "examples": [
       {
         "title": "Initial content",
-        "content": "# Given the \"properties.json\" JSON file with content:\n{ \"properties\": [\n  { \"name\": \"env_type\"    , \"value\": \"production\" },\n  { \"name\": \"shell\"       , \"value\": \"/bin/sh\" },\n  { \"name\": \"utf-8 poetry\", \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\" }\n] }",
+        "content": "# Given the \"data.json\" JSON file with content:\n{ \"properties\": [\n  { \"name\": \"env_type\"    , \"value\": \"production\" },\n  { \"name\": \"shell\"       , \"value\": \"/bin/sh\" },\n  { \"name\": \"utf-8 poetry\", \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\" }\n]\n, \"policyMode\" : \"audit\"\n}",
         "type": "json"
       },
       {
-        "title": "Set key",
-        "content": "# Setting keys from \"properties.json\":\ncurl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d @properties.json",
+        "title": "Set properties and change to audit mode",
+        "content": "# Setting properties from \"data.json\" and policy mode to audit:\ncurl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d @properties.json",
         "type": "json"
       },
       {
-        "title": "Remove key",
+        "title": "Remove one property, change another one",
         "content": "# Removing the key \"utf-8 poetry\" from the command line and updating the \"env_type\" one:\ncurl -H \"X-API-Token: yourToken\" -X POST  -H \"Content-Type: application/json\" https://rudder.example.com/rudder/api/latest/nodes/NodeID -d '{ \"properties\": [{ \"name\":\"utf-8 poetry\", \"value\":\"\"}, {\"name\":\"env_type\", \"value\":\"deprovisioned\"}] }'",
         "type": "json"
       },
       {
-        "title": "Remove key (bis)",
-        "content": "# Removing the key \"env_type\" and changing \"shell\" (no JSON):\ncurl -H \"X-API-Token: yourToken\" -X POST  https://rudder.example.com/rudder/api/latest/nodes/NodeID -d \"properties=shell=/bin/false\" -d \"properties=env_type=\"",
+        "title": "Remove a property, change another one and switch to default mode",
+        "content": "# Removing the key \"env_type\" and changing \"shell\" and use default policy mode:\ncurl -H \"X-API-Token: yourToken\" -X POST  https://rudder.example.com/rudder/api/latest/nodes/NodeID -d \"properties=shell=/bin/false\" -d \"properties=env_type=\" -d \"policyMode=default\"",
         "type": "json"
       }
     ],
     "success": {
       "examples": [
         {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"updateNodeProperties\",\n  \"id\": \"4db088c8-d849-4f08-bfa9-ac96a22d461a\",\n  \"result\": \"success\",\n  \"data\": {\n    \"properties\": [\n      {\n        \"name\": \"env_type\",\n        \"value\": \"production\"\n      },\n      {\n        \"name\": \"shell\",\n        \"value\": \"/bin/sh\"\n      },\n      {\n        \"name\": \"utf-8 poetry\",\n        \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\"\n      }\n    ]\n  }\n}",
+          "title": "Set properties and change to audit mode:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"updateNode\",\n  \"id\": \"4db088c8-d849-4f08-bfa9-ac96a22d461a\",\n  \"result\": \"success\",\n  \"data\": {\n    \"policyMode\": \"audit\",\n    \"properties\": [\n      {\n        \"name\": \"env_type\",\n        \"value\": \"production\"\n      },\n      {\n        \"name\": \"shell\",\n        \"value\": \"/bin/sh\"\n      },\n      {\n        \"name\": \"utf-8 poetry\",\n        \"value\": \"ᚠᛇᚻ᛫ᛒᛦᚦ᛫ᚠᚱᚩᚠᚢᚱ᛫ᚠᛁᚱᚪ᛫ᚷᛖᚻᚹᛦᛚᚳᚢᛗ\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Remove property and modify another one:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"updateNode\",\n  \"id\": \"4db088c8-d849-4f08-bfa9-ac96a22d461a\",\n  \"result\": \"success\",\n  \"data\": {\n    \"policyMode\": \"audit\",\n    \"properties\": [\n      {\n        \"name\": \"env_type\",\n        \"value\": \"deprovisioned\"\n      },\n      {\n        \"name\": \"shell\",\n        \"value\": \"/bin/sh\"\n      }\n    ]\n  }\n}",
+          "type": "json"
+        },
+        {
+          "title": "Remove a property, modify another and change to audit mode:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"updateNode\",\n  \"id\": \"4db088c8-d849-4f08-bfa9-ac96a22d461a\",\n  \"result\": \"success\",\n  \"data\": {\n    \"policyMode\": \"default\",\n    \"properties\": [\n      {\n        \"name\": \"shell\",\n        \"value\": \"/bin/false\"\n      }\n    ]\n  }\n}",
           "type": "json"
         }
       ]
@@ -3775,7 +3668,7 @@
     "type": "put",
     "url": "/api/parameters",
     "title": "3. Create a new Parameter",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "createParameter",
     "group": "Parameters",
     "examples": [
@@ -3835,7 +3728,7 @@
     "type": "delete",
     "url": "/api/parameters/{id}",
     "title": "5. Delete a Parameter",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "deleteParameter",
     "group": "Parameters",
     "examples": [
@@ -3883,7 +3776,7 @@
     "type": "get",
     "url": "/api/parameters",
     "title": "1. List all Parameters",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "listParameters",
     "group": "Parameters",
     "examples": [
@@ -3909,7 +3802,7 @@
     "type": "get",
     "url": "/api/parameters/{id}",
     "title": "2. Get Parameter details",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "parameterDetails",
     "group": "Parameters",
     "examples": [
@@ -3948,7 +3841,7 @@
     "type": "post",
     "url": "/api/parameters/{id}",
     "title": "4. Update a Parameter",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "updateParameter",
     "group": "Parameters",
     "parameter": {
@@ -4010,7 +3903,7 @@
     "type": "get",
     "url": "/api/rules/tree",
     "title": "7. Get Rules tree",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "GetRuleTree",
     "group": "Rules",
     "description": "<p>Get all Rules available in Rudder and their cateogries in a Tree</p>",
@@ -4037,7 +3930,7 @@
     "type": "put",
     "url": "/api/rules",
     "title": "6. Clone a Rule",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "cloneRule",
     "group": "Rules",
     "description": "<p>Create a new Rule based on an existing Rule. you can still modify its parameters, but you need at least to specify the name of the new Rule</p>",
@@ -4146,7 +4039,7 @@
     "type": "put",
     "url": "/api/rules",
     "title": "3. Create a new Rule",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "createRule",
     "group": "Rules",
     "description": "<p>Create a new Rule in Rudder. You can define all of its parameters, but you need at least its name</p>",
@@ -4230,7 +4123,7 @@
     "type": "put",
     "url": "/api/rules/categories",
     "title": "11. Create a new Rule category.",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "createRuleCategory",
     "group": "Rules",
     "description": "<p>Create a new Rule category in Rudder. You can define all of its parameters, but you need at least its name</p>",
@@ -4284,7 +4177,7 @@
     "type": "delete",
     "url": "/api/rules/{id}",
     "title": "5. Delete a Rule",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "deleteRule",
     "group": "Rules",
     "description": "<p>Delete the Rule having the ID passed in the URL</p>",
@@ -4333,7 +4226,7 @@
     "type": "get",
     "url": "/api/rules/categories/{id}",
     "title": "9. Delete a Rule category",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "deleteRuleCategory",
     "group": "Rules",
     "description": "<p>Delete a Rule category. It must have no child rules and no children categories</p>",
@@ -4373,7 +4266,7 @@
     "type": "get",
     "url": "/api/rules/categories/{id}",
     "title": "8. Get a Rule category details",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "getRuleCategoryDetails",
     "group": "Rules",
     "description": "<p>Get the details of a Rule category, whose ID is specified in the URL</p>",
@@ -4413,7 +4306,7 @@
     "type": "get",
     "url": "/api/rules",
     "title": "1. List all Rules",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "listRules",
     "group": "Rules",
     "description": "<p>Get all Rules available in Rudder</p>",
@@ -4440,7 +4333,7 @@
     "type": "get",
     "url": "/api/rules/{id}",
     "title": "2. Get a Rule details",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "ruleDetails",
     "group": "Rules",
     "description": "<p>Get details for one Rule by specifying its ID in the URL</p>",
@@ -4480,7 +4373,7 @@
     "type": "post",
     "url": "/api/rules/{id}",
     "title": "4. Update a Rule",
-    "version": "2.0.0",
+    "version": "10.0.0",
     "name": "updateRule",
     "group": "Rules",
     "description": "<p>Modify any parameters of a Rule. Missing parameters means to not modify that parameter</p>",
@@ -4564,7 +4457,7 @@
     "type": "post",
     "url": "/api/rules/categories/{id}",
     "title": "10. Update a Rule Category",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "updateRuleCategory",
     "group": "Rules",
     "description": "<p>Modify any parameters of a Rule category. Missing parameters means to not modify that parameter</p>",
@@ -4627,7 +4520,7 @@
     "type": "Response format documentation",
     "url": "/api/settings",
     "title": "0. List of all available settings",
-    "version": "10.0.0",
+    "version": "12.0.0",
     "group": "Settings",
     "description": "<p>Here is the list of all settings that can be managed within Rudder.</p>",
     "parameter": {
@@ -4652,7 +4545,7 @@
             "type": "Int",
             "optional": true,
             "field": "run_frequency",
-            "description": "<p>Agent run schedule - time between agent run (in minutes)</p>"
+            "description": "<p>Agent run schedule - time between agent runs (in minutes)</p>"
           },
           {
             "group": "Parameter",
@@ -4700,8 +4593,43 @@
             "group": "Parameter",
             "type": "String",
             "optional": true,
+            "field": "relay_server_synchronization_method",
+            "description": "<p>Method used to synchronize data between Rudder Server and Relays, either &quot;classic&quot; (agent protocol, default), &quot;rsync&quot; (use rsync to synchronize, that you'll need to be manually set up), or &quot;disabled&quot; (use third party system to transmit data)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "relay_server_synchronize_policies",
+            "description": "<p>If &quot;rsync&quot; is set as a synchronization method, use rsync to synchronize policies between Rudder Server and Relays. If false, you'll have to synchronize policies yourself.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "relay_server_synchronize_shared_files",
+            "description": "<p>If &quot;rsync&quot; is set as a synchronization method, use rsync to synchronize shared files between Rudder Server and Relays. If false, you'll have to synchronize shared files yourself.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "rudder_report_protocol_default",
+            "description": "<p>Default reporting protocol used, either &quot;HTTPS&quot; or &quot;SYSLOG&quot; (can be overriden on a node basis)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "syslog_protocol_disabled",
+            "description": "<p>Completely disable rudder syslog protocol</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
             "field": "rsyslog_reporting_protocol",
-            "description": "<p>Protocole used for syslog communication between node and server, either &quot;UDP&quot; (default) or &quot;TCP&quot;</p>"
+            "description": "<p>Protocol used for syslog communication between node and server, either &quot;UDP&quot; (default) or &quot;TCP&quot;</p>"
           },
           {
             "group": "Parameter",
@@ -4786,6 +4714,352 @@
             "optional": true,
             "field": "send_metrics",
             "description": "<p>Send anonymous usage statistics</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "node_onaccept_default_state",
+            "description": "<p>Set default state for node when they are accepted within Rudder, can be &quot;enabled&quot;, &quot;ignored&quot;, &quot;empty-policies&quot;, &quot;initializing&quot;, &quot;preparing-eol&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "node_onaccept_default_policyMode",
+            "description": "<p>Default policy mode for accepted node, can be &quot;default&quot;, &quot;enforce&quot; or &quot;audit&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "unexpected_allows_duplicate",
+            "description": "<p>Ignore duplicated compliance reports (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "unexpected_unbound_var_values",
+            "description": "<p>Allows multiple reports for configuration based on a multivalued variable (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_compute_changes",
+            "description": "<p>Compute list of changes (repaired reports) per rules (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_generation_compute_dyngroups",
+            "description": "<p>Recompute all dynamic groups at the start of policy generation (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_save_db_compliance_levels",
+            "description": "<p>Store all compliance levels in database (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_save_db_compliance_details",
+            "description": "<p>Store all compliance details in database (default false)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "rudder_generation_max_parallelism",
+            "description": "<p>Set the policy generation parrallelism, either as an number of thread (i.e. 4), or a multiplicative of the number of core (x0.5) (default 0.5)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "rudder_generation_js_timeout",
+            "description": "<p>Policy generation JS evaluation of directive parameter timeout in seconds (default 30)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_generation_continue_on_error",
+            "description": "<p>Policy generation continues on error during NodeConfiguration evaluation (default false)</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/api_v2/settings.md",
+    "groupTitle": "Settings",
+    "name": "Response_format_documentationApiSettings"
+  },
+  {
+    "type": "Response format documentation",
+    "url": "/api/settings",
+    "title": "0. List of all available settings",
+    "version": "10.0.0",
+    "group": "Settings",
+    "description": "<p>Here is the list of all settings that can be managed within Rudder.</p>",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "global_policy_mode",
+            "description": "<p>Define the default setting for global policy mode, either &quot;enforce&quot; or &quot;audit&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "global_policy_mode_overridable",
+            "description": "<p>Allow overrides on this default setting</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "run_frequency",
+            "description": "<p>Agent run schedule - time between agent runs (in minutes)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "first_run_hour",
+            "description": "<p>First agent run time - hour</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "first_run_minute",
+            "description": "<p>First agent run time - minute</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "splay_time",
+            "description": "<p>Maximum delay after scheduled run time (random interval)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "modified_file_ttl",
+            "description": "<p>Number of days to retain modified files</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "output_file_ttl",
+            "description": "<p>Number of days to retain agent output files</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "require_time_synchronization",
+            "description": "<p>Require time synchronization between nodes and policy server</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "relay_server_synchronization_method",
+            "description": "<p>Method used to synchronize data between Rudder Server and Relays, either &quot;classic&quot; (agent protocol, default), &quot;rsync&quot; (use rsync to synchronize, that you'll need to be manually set up), or &quot;disabled&quot; (use third party system to transmit data)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "relay_server_synchronize_policies",
+            "description": "<p>If &quot;rsync&quot; is set as a synchronization method, use rsync to synchronize policies between Rudder Server and Relays. If false, you'll have to synchronize policies yourself.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "relay_server_synchronize_shared_files",
+            "description": "<p>If &quot;rsync&quot; is set as a synchronization method, use rsync to synchronize shared files between Rudder Server and Relays. If false, you'll have to synchronize shared files yourself.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "rsyslog_reporting_protocol",
+            "description": "<p>Protocol used for syslog communication between node and server, either &quot;UDP&quot; (default) or &quot;TCP&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "reporting_mode",
+            "description": "<p>Compliance reporting mode, either &quot;full-compliance&quot; (default), &quot;changes-only&quot; or &quot;reports-disabled&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "heartbeat_frequency",
+            "description": "<p>Send heartbeat every heartbeat_frequency runs (only on &quot;changes-only&quot; compliance mode)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "log_all_reports",
+            "description": "<p>Log all reports received to /var/log/rudder/reports/all.log</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enable_change_message",
+            "description": "<p>Enable change audit logs</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "mandatory_change_message",
+            "description": "<p>Make message mandatory</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "change_message_prompt",
+            "description": "<p>Explanation to display</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enable_change_request",
+            "description": "<p>Enable Change Requests</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enable_self_validation",
+            "description": "<p>Allow self validation</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "enable_self_deployment",
+            "description": "<p>Allow self deployment</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "display_recent_changes_graphs",
+            "description": "<p>Display changes graphs</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "enable_javascript_directives",
+            "description": "<p>Enable script evaluation in Directives</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "send_metrics",
+            "description": "<p>Send anonymous usage statistics</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "node_onaccept_default_state",
+            "description": "<p>Set default state for node when they are accepted within Rudder, can be &quot;enabled&quot;, &quot;ignored&quot;, &quot;empty-policies&quot;, &quot;initializing&quot;, &quot;preparing-eol&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "node_onaccept_default_policyMode",
+            "description": "<p>Default policy mode for accepted node, can be &quot;default&quot;, &quot;enforce&quot; or &quot;audit&quot;</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "unexpected_allows_duplicate",
+            "description": "<p>Ignore duplicated compliance reports (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "unexpected_unbound_var_values",
+            "description": "<p>Allows multiple reports for configuration based on a multivalued variable (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_compute_changes",
+            "description": "<p>Compute list of changes (repaired reports) per rules (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_generation_compute_dyngroups",
+            "description": "<p>Recompute all dynamic groups at the start of policy generation (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_save_db_compliance_levels",
+            "description": "<p>Store all compliance levels in database (default true)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_save_db_compliance_details",
+            "description": "<p>Store all compliance details in database (default false)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "rudder_generation_max_parallelism",
+            "description": "<p>Set the policy generation parrallelism, either as an number of thread (i.e. 4), or a multiplicative of the number of core (x0.5) (default 0.5)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "rudder_generation_js_timeout",
+            "description": "<p>Policy generation JS evaluation of directive parameter timeout in seconds (default 30)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": true,
+            "field": "rudder_generation_continue_on_error",
+            "description": "<p>Policy generation continues on error during NodeConfiguration evaluation (default false)</p>"
           }
         ]
       }
@@ -4823,7 +5097,7 @@
             "type": "Int",
             "optional": true,
             "field": "run_frequency",
-            "description": "<p>Agent run schedule - time between agent run (in minutes)</p>"
+            "description": "<p>Agent run schedule - time between agent runs (in minutes)</p>"
           },
           {
             "group": "Parameter",
@@ -4879,7 +5153,7 @@
             "type": "String",
             "optional": true,
             "field": "rsyslog_reporting_protocol",
-            "description": "<p>Protocole used for syslog communication between node and server, either &quot;UDP&quot; (default) or &quot;TCP&quot;</p>"
+            "description": "<p>Protocol used for syslog communication between node and server, either &quot;UDP&quot; (default) or &quot;TCP&quot;</p>"
           },
           {
             "group": "Parameter",
@@ -4976,6 +5250,32 @@
     "type": "get",
     "url": "/api/settings",
     "title": "1. List all Settings",
+    "version": "12.0.0",
+    "name": "getAllSettings",
+    "group": "Settings",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/settings",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"getAllSettings\",\n  \"result\": \"success\",\n  \"data\": {\n    \"settings\": {\n      \"global_policy_mode\": \"enforce\",\n      \"global_policy_mode_overridable\": true,\n      \"run_frequency\": 5,\n      \"first_run_hour\": 0,\n      \"first_run_minute\": 0,\n      \"splay_time\": 4,\n      \"modified_file_ttl\": 30,\n      \"output_file_ttl\": 7,\n      \"require_time_synchronization\": true,\n      \"rsyslog_reporting_protocol\": \"UDP\",\n      \"rudder_report_protocol_default\": \"HTTPS\",\n      \"syslog_protocol_disabled\": true,\n      \"reporting_mode\": \"full-compliance\",\n      \"heartbeat_frequency\": 1,\n      \"log_all_reports\": true,\n      \"enable_change_message\": true,\n      \"mandatory_change_message\": false,\n      \"change_message_prompt\": \"Please enter a reason explaining this change.\",\n      \"enable_change_request\": false,\n      \"enable_self_validation\": true,\n      \"enable_self_deployment\": true,\n      \"display_recent_changes_graphs\": true,\n      \"enable_javascript_directives\": \"enabled\",\n      \"send_metrics\": \"not defined\",\n      \"node_onaccept_default_state\": \"enabled\",\n      \"node_onaccept_default_policyMode\": \"default\",\n      \"unexpected_allows_duplicate\": true,\n      \"unexpected_unbound_var_values\": true,\n      \"rudder_compute_changes\": true,\n      \"rudder_generation_compute_dyngroups\": true,\n      \"rudder_save_db_compliance_levels\": true,\n      \"rudder_save_db_compliance_details\": false,\n      \"rudder_generation_max_parallelism\": \"x0.5\",\n      \"rudder_generation_js_timeout\": 30,\n      \"rudder_generation_continue_on_error\": false\n\n    }\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/settings.md",
+    "groupTitle": "Settings"
+  },
+  {
+    "type": "get",
+    "url": "/api/settings",
+    "title": "1. List all Settings",
     "version": "10.0.0",
     "name": "getAllSettings",
     "group": "Settings",
@@ -4990,7 +5290,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"getAllSettings\",\n  \"result\": \"success\",\n  \"data\": {\n    \"settings\": {\n      \"global_policy_mode\": \"enforce\",\n      \"global_policy_mode_overridable\": true,\n      \"run_frequency\": 5,\n      \"first_run_hour\": 0,\n      \"first_run_minute\": 0,\n      \"splay_time\": 4,\n      \"modified_file_ttl\": 30,\n      \"output_file_ttl\": 7,\n      \"require_time_synchronization\": true,\n      \"rsyslog_reporting_protocol\": \"UDP\",\n      \"reporting_mode\": \"full-compliance\",\n      \"heartbeat_frequency\": 1,\n      \"log_all_reports\": true,\n      \"enable_change_message\": true,\n      \"mandatory_change_message\": false,\n      \"change_message_prompt\": \"Please enter a reason explaining this change.\",\n      \"enable_change_request\": false,\n      \"enable_self_validation\": true,\n      \"enable_self_deployment\": true,\n      \"display_recent_changes_graphs\": true,\n      \"enable_javascript_directives\": \"enabled\",\n      \"send_metrics\": \"not defined\"\n    }\n  }\n}",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"getAllSettings\",\n  \"result\": \"success\",\n  \"data\": {\n    \"settings\": {\n      \"global_policy_mode\": \"enforce\",\n      \"global_policy_mode_overridable\": true,\n      \"run_frequency\": 5,\n      \"first_run_hour\": 0,\n      \"first_run_minute\": 0,\n      \"splay_time\": 4,\n      \"modified_file_ttl\": 30,\n      \"output_file_ttl\": 7,\n      \"require_time_synchronization\": true,\n      \"rsyslog_reporting_protocol\": \"UDP\",\n      \"reporting_mode\": \"full-compliance\",\n      \"heartbeat_frequency\": 1,\n      \"log_all_reports\": true,\n      \"enable_change_message\": true,\n      \"mandatory_change_message\": false,\n      \"change_message_prompt\": \"Please enter a reason explaining this change.\",\n      \"enable_change_request\": false,\n      \"enable_self_validation\": true,\n      \"enable_self_deployment\": true,\n      \"display_recent_changes_graphs\": true,\n      \"enable_javascript_directives\": \"enabled\",\n      \"send_metrics\": \"not defined\",\n      \"node_onaccept_default_state\": \"enabled\",\n      \"node_onaccept_default_policyMode\": \"default\",\n      \"unexpected_allows_duplicate\": true,\n      \"unexpected_unbound_var_values\": true,\n      \"rudder_compute_changes\": true,\n      \"rudder_generation_compute_dyngroups\": true,\n      \"rudder_save_db_compliance_levels\": true,\n      \"rudder_save_db_compliance_details\": false,\n      \"rudder_generation_max_parallelism\": \"x0.5\",\n      \"rudder_generation_js_timeout\": 30,\n      \"rudder_generation_continue_on_error\": false\n\n    }\n  }\n}",
           "type": "json"
         }
       ]
@@ -5028,7 +5328,7 @@
     "type": "get",
     "url": "/api/settings/{id}",
     "title": "2. Get Setting value",
-    "version": "8.0.0",
+    "version": "10.0.0",
     "name": "getSetting",
     "group": "Settings",
     "examples": [
@@ -5067,7 +5367,7 @@
     "type": "post",
     "url": "/api/settings/{id}",
     "title": "3. Update a Setting",
-    "version": "8.0.0",
+    "version": "10.0.0",
     "name": "modifySetting",
     "group": "Settings",
     "parameter": {
@@ -5165,6 +5465,32 @@
   },
   {
     "type": "get",
+    "url": "/api/system/info",
+    "title": "2. Get information about Rudder version",
+    "version": "11.0.0",
+    "name": "getSystemInfo",
+    "group": "System",
+    "examples": [
+      {
+        "title": "Example usage:",
+        "content": "curl -H \"X-API-Token: yourToken\" https://rudder.example.com/rudder/api/latest/system/info",
+        "type": "json"
+      }
+    ],
+    "success": {
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"action\": \"getSystemInfo\",\n  \"result\": \"success\",\n  \"data\": {\n    \"rudder\": {\n      \"major-version\": \"5.0\",\n      \"full-version\": \"5.0.9-SNAPSHOT\",\n      \"build-time\": \"2019-03-25T10:11:23Z\"\n    }\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "src/api_v2/system.md",
+    "groupTitle": "System"
+  },
+  {
+    "type": "get",
     "url": "/api/system/archives/<archiveKind>",
     "title": "8. List Rudder archives",
     "version": "11.0.0",
@@ -5222,7 +5548,7 @@
   {
     "type": "post",
     "url": "/api/regenerate/policies",
-    "title": "5. Trigger a new policy generation",
+    "title": "6. Trigger a new policy generation",
     "version": "11.0.0",
     "name": "regeneratePolicies",
     "group": "System",
@@ -5248,7 +5574,7 @@
   {
     "type": "post",
     "url": "/api/system/reload",
-    "title": "2. Reload both techniques and dynamic groups",
+    "title": "3. Reload both techniques and dynamic groups",
     "version": "11.0.0",
     "name": "reloadAll",
     "group": "System",
@@ -5274,7 +5600,7 @@
   {
     "type": "post",
     "url": "/api/system/reload/groups",
-    "title": "4. Reload dynamic groups",
+    "title": "5. Reload dynamic groups",
     "version": "11.0.0",
     "name": "reloadGroups",
     "group": "System",
@@ -5300,7 +5626,7 @@
   {
     "type": "post",
     "url": "/api/reload/techniques",
-    "title": "3. Reload Technique library",
+    "title": "4. Reload Technique library",
     "version": "11.0.0",
     "name": "reloadTechniques",
     "group": "System",
@@ -5353,7 +5679,7 @@
     "type": "get",
     "url": "/api/techniques/{name}/{version}/directives",
     "title": "3. List all Directives based on one version of a Technique",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "listDirectivesVersion",
     "group": "Techniques",
     "parameter": {
@@ -5399,7 +5725,7 @@
     "type": "get",
     "url": "/api/techniques",
     "title": "1. List all Techniques",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "listTechniques",
     "group": "Techniques",
     "examples": [
@@ -5425,7 +5751,7 @@
     "type": "get",
     "url": "/api/techniques/{name}/directives",
     "title": "2. List all Directives based on all version of a Technique",
-    "version": "6.0.0",
+    "version": "10.0.0",
     "name": "listTechniquesDirectives",
     "group": "Techniques",
     "parameter": {
