@@ -45,5 +45,7 @@ clean:
 
 veryclean: clean
 distclean: veryclean
+localclean: clean
+localdepends:
 
 .PHONY: localdepends localclean veryclean
