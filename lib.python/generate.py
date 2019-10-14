@@ -8,9 +8,10 @@
 import json
 import re
 import pprint
+from collections import OrderedDict
 
 file=open("../api_data.json")
-data=json.load(file)
+data=json.load(file, object_pairs_hook=OrderedDict)
 file.close()
 
 
@@ -32,7 +33,8 @@ def generate(function):
   # get parameters metadata
   if 'parameter' in function:
     parameter_list = function['parameter']['fields']
-    for plist in parameter_list.itervalues():
+    for key in parameter_list.keys():
+      plist = parameter_list[key]
       for parameter in plist:
         if parameter['group'] == "URL parameters":
           url_params.append(parameter['field']);
