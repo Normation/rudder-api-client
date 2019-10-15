@@ -44,7 +44,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/changeRequests.md",
+    "filename": "src/public-api/endpoints/changeRequests.md",
     "groupTitle": "Change_Requests"
   },
   {
@@ -70,7 +70,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/changeRequests.md",
+    "filename": "src/public-api/endpoints/changeRequests.md",
     "groupTitle": "Change_Requests",
     "parameter": {
       "fields": {
@@ -109,7 +109,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/changeRequests.md",
+    "filename": "src/public-api/endpoints/changeRequests.md",
     "groupTitle": "Change_Requests",
     "parameter": {
       "fields": {
@@ -162,7 +162,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/changeRequests.md",
+    "filename": "src/public-api/endpoints/changeRequests.md",
     "groupTitle": "Change_Requests"
   },
   {
@@ -217,7 +217,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/changeRequests.md",
+    "filename": "src/public-api/endpoints/changeRequests.md",
     "groupTitle": "Change_Requests"
   },
   {
@@ -244,7 +244,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/compliance.md",
+    "filename": "src/public-api/endpoints/compliance.md",
     "groupTitle": "Compliance"
   },
   {
@@ -271,7 +271,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/compliance.md",
+    "filename": "src/public-api/endpoints/compliance.md",
     "groupTitle": "Compliance",
     "parameter": {
       "fields": {
@@ -321,7 +321,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/compliance.md",
+    "filename": "src/public-api/endpoints/compliance.md",
     "groupTitle": "Compliance",
     "parameter": {
       "fields": {
@@ -362,7 +362,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/compliance.md",
+    "filename": "src/public-api/endpoints/compliance.md",
     "groupTitle": "Compliance",
     "parameter": {
       "fields": {
@@ -412,7 +412,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/compliance.md",
+    "filename": "src/public-api/endpoints/compliance.md",
     "groupTitle": "Compliance",
     "parameter": {
       "fields": {
@@ -633,7 +633,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources"
   },
   {
@@ -659,7 +659,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources",
     "parameter": {
       "fields": {
@@ -699,7 +699,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources"
   },
   {
@@ -726,7 +726,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources",
     "parameter": {
       "fields": {
@@ -766,7 +766,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources",
     "parameter": {
       "fields": {
@@ -806,7 +806,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources",
     "parameter": {
       "fields": {
@@ -845,7 +845,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources"
   },
   {
@@ -871,7 +871,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources",
     "parameter": {
       "fields": {
@@ -937,7 +937,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/datasources.md",
+    "filename": "src/public-api/endpoints/datasources.md",
     "groupTitle": "DataSources"
   },
   {
@@ -1035,7 +1035,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives"
   },
   {
@@ -1138,11 +1138,11 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"source=DirectiveIDSource\" -d \"displayName=Name of New Directive”",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT http://rudder.example.com/rudder/api/latest/directives  -d \"source=DirectiveIDSource\" -d \"displayName=Name of New Directive\"",
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives"
   },
   {
@@ -1262,7 +1262,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives"
   },
   {
@@ -1279,7 +1279,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives",
     "parameter": {
       "fields": {
@@ -1309,7 +1309,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives",
     "parameter": {
       "fields": {
@@ -1348,7 +1348,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives"
   },
   {
@@ -1460,7 +1460,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/directives.md",
+    "filename": "src/public-api/endpoints/directives.md",
     "groupTitle": "Directives"
   },
   {
@@ -1487,7 +1487,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -1558,11 +1558,11 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X PUT 'http://rudder.example.com/rudder/api/latest/groups' -d “groups=GroupID”",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT 'http://rudder.example.com/rudder/api/latest/groups' -d \"groups=GroupID\"",
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -1642,7 +1642,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -1696,7 +1696,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -1713,7 +1713,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups",
     "parameter": {
       "fields": {
@@ -1753,7 +1753,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups",
     "parameter": {
       "fields": {
@@ -1793,7 +1793,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups",
     "parameter": {
       "fields": {
@@ -1823,7 +1823,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups",
     "parameter": {
       "fields": {
@@ -1853,7 +1853,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -1863,7 +1863,7 @@
     "version": "10.0.0",
     "name": "reloadGroup",
     "group": "Groups",
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups",
     "parameter": {
       "fields": {
@@ -1943,7 +1943,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -2006,7 +2006,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/groups.md",
+    "filename": "src/public-api/endpoints/groups.md",
     "groupTitle": "Groups"
   },
   {
@@ -3125,7 +3125,7 @@
         ]
       }
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes",
     "name": "Response_format_documentationApiNodesPendingApiNodesApiNodesNodeid"
   },
@@ -3175,7 +3175,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3224,7 +3224,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3264,7 +3264,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3303,7 +3303,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3338,7 +3338,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes",
     "parameter": {
       "fields": {
@@ -3434,7 +3434,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3474,7 +3474,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3571,7 +3571,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3661,7 +3661,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/nodes.md",
+    "filename": "src/public-api/endpoints/nodes.md",
     "groupTitle": "Nodes"
   },
   {
@@ -3687,7 +3687,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/parameters.md",
+    "filename": "src/public-api/endpoints/parameters.md",
     "groupTitle": "Parameters",
     "parameter": {
       "fields": {
@@ -3756,7 +3756,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/parameters.md",
+    "filename": "src/public-api/endpoints/parameters.md",
     "groupTitle": "Parameters",
     "parameter": {
       "fields": {
@@ -3795,7 +3795,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/parameters.md",
+    "filename": "src/public-api/endpoints/parameters.md",
     "groupTitle": "Parameters"
   },
   {
@@ -3821,7 +3821,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/parameters.md",
+    "filename": "src/public-api/endpoints/parameters.md",
     "groupTitle": "Parameters",
     "parameter": {
       "fields": {
@@ -3896,7 +3896,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/parameters.md",
+    "filename": "src/public-api/endpoints/parameters.md",
     "groupTitle": "Parameters"
   },
   {
@@ -3923,7 +3923,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules"
   },
   {
@@ -4010,7 +4010,7 @@
     "examples": [
       {
         "title": "Example usage:",
-        "content": "curl -H \"X-API-Token: yourToken\" -X PUT 'http://rudder.example.com/rudder/api/latest/rules?prettify=true'  -d \"source=RuleIDSource\" -d \"displayName=Name of New Rule”",
+        "content": "curl -H \"X-API-Token: yourToken\" -X PUT 'http://rudder.example.com/rudder/api/latest/rules?prettify=true'  -d \"source=RuleIDSource\" -d \"displayName=Name of New Rule\"",
         "type": "json"
       }
     ],
@@ -4032,7 +4032,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules"
   },
   {
@@ -4050,7 +4050,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules",
     "parameter": {
       "fields": {
@@ -4170,7 +4170,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules"
   },
   {
@@ -4206,7 +4206,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules",
     "parameter": {
       "fields": {
@@ -4246,7 +4246,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules",
     "parameter": {
       "fields": {
@@ -4286,7 +4286,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules",
     "parameter": {
       "fields": {
@@ -4326,7 +4326,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules"
   },
   {
@@ -4353,7 +4353,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules",
     "parameter": {
       "fields": {
@@ -4450,7 +4450,7 @@
         "type": "json"
       }
     ],
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules"
   },
   {
@@ -4513,7 +4513,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/rules.md",
+    "filename": "src/public-api/endpoints/rules.md",
     "groupTitle": "Rules"
   },
   {
@@ -4795,7 +4795,7 @@
         ]
       }
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings",
     "name": "Response_format_documentationApiSettings"
   },
@@ -5064,7 +5064,7 @@
         ]
       }
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings",
     "name": "Response_format_documentationApiSettings"
   },
@@ -5242,7 +5242,7 @@
         ]
       }
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings",
     "name": "Response_format_documentationApiSettings"
   },
@@ -5269,7 +5269,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings"
   },
   {
@@ -5295,7 +5295,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings"
   },
   {
@@ -5321,7 +5321,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings"
   },
   {
@@ -5347,7 +5347,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings",
     "parameter": {
       "fields": {
@@ -5408,7 +5408,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/settings.md",
+    "filename": "src/public-api/endpoints/settings.md",
     "groupTitle": "Settings"
   },
   {
@@ -5434,7 +5434,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5460,7 +5460,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5486,7 +5486,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5542,7 +5542,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5568,7 +5568,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5594,7 +5594,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5620,7 +5620,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5646,7 +5646,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5672,7 +5672,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/system.md",
+    "filename": "src/public-api/endpoints/system.md",
     "groupTitle": "System"
   },
   {
@@ -5718,7 +5718,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/techniques.md",
+    "filename": "src/public-api/endpoints/techniques.md",
     "groupTitle": "Techniques"
   },
   {
@@ -5744,7 +5744,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/techniques.md",
+    "filename": "src/public-api/endpoints/techniques.md",
     "groupTitle": "Techniques"
   },
   {
@@ -5783,7 +5783,7 @@
         }
       ]
     },
-    "filename": "src/api_v2/techniques.md",
+    "filename": "src/public-api/endpoints/techniques.md",
     "groupTitle": "Techniques"
   }
 ]
