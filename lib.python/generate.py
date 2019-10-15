@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# 
+#
 # WARNING: Make changes wisely,     most of the change you do here have an impact on existing libraries publicly used
 #          Make changes in cli too, most of the change you do here have an impact on rudder-cli
 #
@@ -10,9 +10,15 @@ import re
 import pprint
 from collections import OrderedDict
 
-file=open("../api_data.json")
-data=json.load(file, object_pairs_hook=OrderedDict)
-file.close()
+try:
+  file=open("../api_data.json")
+  data=json.load(file, object_pairs_hook=OrderedDict)
+  file.close()
+except:
+  file=open("../api_data.json", encoding='utf-8')
+  data=json.load(file, object_pairs_hook=OrderedDict)
+  file.close()
+
 
 
 def generate(function):
@@ -29,7 +35,7 @@ def generate(function):
   url_params = []
   mandatory_params = []
   optional_params = []
-  
+
   # get parameters metadata
   if 'parameter' in function:
     parameter_list = function['parameter']['fields']
