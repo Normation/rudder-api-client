@@ -11,7 +11,7 @@ PYTHON_BINARY="/usr/bin/python"
 if command -v python3 &>/dev/null; then
     PYTHON_BINARY="/usr/bin/python3"
 fi
-${PYTHONBINARY} ${GENERATOR} > ${TEMP}
+${PYTHON_BINARY} ${GENERATOR} > ${TEMP}
 sed "/${DELIMITER}/r${TEMP}" ${SRC} > ${DST}
 
 rm "${TEMP}"
