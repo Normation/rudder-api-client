@@ -8,6 +8,7 @@
 import json
 import re
 import pprint
+import urllib
 from collections import OrderedDict
 
 try:
@@ -67,7 +68,12 @@ def generate(function):
     print('    clean_params(data)')
   final_url = '"' + url.replace('{', '" + ').replace('}', ' + "') + '"'
   if method == 'GET':
-    print('    return self.request("' + method + '", ' + final_url + ', return_raw=return_raw)')
+    print('    extra=""')
+    for param in optional_params:
+      print("    if %s is not None:"%(param))
+      print('      extra += "?%s=" + urllib.parse.quote(%s)'%(param, param))
+    print('    if extra != "": final_url += "/" + extra')
+    print('    return self.request("' + method + '", ' + final_url + ' + extra, return_raw=return_raw)')
   elif method == 'DELETE':
     print('    return self.request("' + method + '", ' + final_url + ', change_info, return_raw=return_raw)')
   else:
