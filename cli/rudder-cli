@@ -219,7 +219,10 @@ def plural(word):
 
 # get all parameters of an api method from the library
 def get_api_parameters(method):
-  spec = inspect.getargspec(method)
+  if sys.version[0] == 2:
+    spec = inspect.getargspec(method)
+  else:
+    spec = inspect.getfullargspec(method)
   # get arguments  except self and return_raw
   #args = method.func_code.co_varnames[:method.func_code.co_argcount][1:-1]
   args = spec.args[1:-1]
