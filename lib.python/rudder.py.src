@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import json, requests
-import urllib3
 
 # exceptions to catch : ConnectionError HTTPError Timeout TooManyRedirects 
 #    or RequestException that encompass all of the above
@@ -34,15 +33,16 @@ class RudderEndPoint:
     self.session.verify = verify
     if not verify:
       try: # compatibility with centos 6
+        import urllib3
         urllib3.disable_warnings()
       except:
         pass
     if proxy is not None:
       self.session.proxies = { 'http': proxy, 'https': proxy }
-    self.session.headers = { "X-API-Token": api_key, 
+    self.session.headers = { "X-API-Token": api_key,
                              "X-API-Version": version,
                              "Content-Type": "application/json;charset=utf-8" }
- 
+
   # Exceptions can be raised here !
   def request(self, method, api_url, change_info=None, data=None, json_data=None, return_raw=False):
     global RUDDER_DEBUG_QUERY
