@@ -24,6 +24,8 @@ Options:
 
 """
 
+import sys
+sys.path.append("/usr/share/rudder-api-client")
 from rudder import RudderEndPoint
 from pprint import pprint
 from docopt import docopt
@@ -32,9 +34,17 @@ import requests
 import json
 import os
 import re
-import sys
 
-requests.packages.urllib3.disable_warnings(requests.packages.urllib3.exceptions.InsecureRequestWarning)
+try: # compatibility with centos 6
+  import urllib3
+  urllib3.disable_warnings()
+except:
+  pass
+try:
+  requests.packages.urllib3.disable_warnings()
+except:
+  pass
+
 # Mapping between commands and api calls
 functions = {
         'node' : {
