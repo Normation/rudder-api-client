@@ -3378,14 +3378,14 @@
           {
             "group": "Query",
             "type": "Query",
-            "optional": false,
+            "optional": true,
             "field": "query",
             "description": "<p>A query json object like we use as query in NodeGroups. A three field json object { 'composition' : 'and', 'select' : 'node', 'where' : [{&quot;objectType&quot;:&quot;node&quot;,&quot;attribute&quot;:&quot;OS&quot;,&quot;comparator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;Linux&quot;}]}, That parameter can be replaced by the three following (select, composition, where)</p>"
           },
           {
             "group": "Query",
             "type": "Criterion",
-            "optional": false,
+            "optional": true,
             "field": "where",
             "description": "<p>The criterion you want to find for your nodes like '[{&quot;objectType&quot;:&quot;node&quot;,&quot;attribute&quot;:&quot;OS&quot;,&quot;comparator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;Linux&quot;}]}'</p>"
           },
