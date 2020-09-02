@@ -28,7 +28,6 @@ import sys
 sys.path.append("/usr/share/rudder-api-client")
 from rudder import RudderEndPoint
 from pprint import pprint
-from docopt import docopt
 import inspect
 import requests
 import json
@@ -45,6 +44,16 @@ try:
 except:
   pass
 
+try: # docpot is not always existent in default report
+  from docopt import docopt
+except:
+  try:
+    sys.path.append("/opt/rudder/share/python")
+    from docopt import docopt
+  except:
+    pprint("Cannot find docopt - please install it either with the package manager or with pip")
+    exit(1)
+ 
 # Mapping between commands and api calls
 functions = {
         'node' : {
