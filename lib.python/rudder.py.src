@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 
+import os
 import json, requests
 
-# exceptions to catch : ConnectionError HTTPError Timeout TooManyRedirects 
+# Ignore proxies when dealing using the lib on localhost
+os.environ['NO_PROXY'] = 'localhost'
+
+# exceptions to catch : ConnectionError HTTPError Timeout TooManyRedirects
 #    or RequestException that encompass all of the above
 
 # change_info can be a string or a dict containing : { 'reason': reason, 'changeRequestName': changeRequestName, 'changeRequestDescription': changeRequestDescription }
