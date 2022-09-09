@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import os
-import json, requests
+import json, requests, urllib
 
 # Ignore proxies when dealing using the lib on localhost
 os.environ['NO_PROXY'] = 'localhost'
@@ -29,12 +29,16 @@ class RudderError(requests.exceptions.RequestException):
 
 
 class RudderEndPoint:
-  def __init__(self, endpoint_url, api_key, version="latest",
-               timeout=5, verify=True, proxy=None ):
+  def __init__(self, endpoint_url="https://localhost/rudder", api_key=None, api_key_file='/var/rudder/run/api-token',
+               version="latest", timeout=5, verify=True, proxy=None ):
     self.endpoint_url = endpoint_url
     self.timeout = timeout
     self.session = requests.Session()
     self.session.verify = verify
+    if api_key is None:
+        if os.path.exists(api_key_file):
+            with open(api_key_file) as ftoken:
+                api_key = ftoken.read()
     if not verify:
       try: # compatibility with centos 6
         import urllib3
@@ -50,6 +54,10 @@ class RudderEndPoint:
   # Exceptions can be raised here !
   def request(self, method, api_url, change_info=None, data=None, json_data=None, return_raw=False):
     global RUDDER_DEBUG_QUERY
+    if not api_url.startswith("/"):
+        api_url = "/" + api_url
+    if not api_url.startswith("/api"):
+        api_url = "/api" + api_url
     # request tuning for Rudder server
     url = self.endpoint_url + api_url
     if type(change_info) is str:
@@ -70,7 +78,7 @@ class RudderEndPoint:
     # Do the call here
     self._res = self.session.request(method, url, params=change_info,
                                      # gotcha: for request, json=encode into json, data=take as is
-                                     #         for this api, json=this is json, data=this is structured data 
+                                     #         for this api, json=this is json, data=this is structured data
                                      #json=data, data=json_data,
                                      data=json_data,
                                      allow_redirects=True, timeout=self.timeout

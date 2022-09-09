@@ -71,8 +71,7 @@ def generate(function):
     print('    extra=""')
     for param in optional_params:
       print("    if %s is not None:"%(param))
-      print('      extra += "?%s=" + urllib.parse.quote(%s)'%(param, param))
-    print('    if extra != "": final_url += "/" + extra')
+      print('      extra += "?%s=" + urllib.parse.quote(str(%s))'%(param, param))
     print('    return self.request("' + method + '", ' + final_url + ' + extra, return_raw=return_raw)')
   elif method == 'DELETE':
     print('    return self.request("' + method + '", ' + final_url + ', change_info, return_raw=return_raw)')
