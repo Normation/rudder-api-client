@@ -239,7 +239,8 @@ def plural(word):
 # get all parameters of an api method from the library
 def get_api_parameters(method):
   if sys.version[0] == 2:
-    spec = inspect.getargspec(method)
+      # Python2 compat can be remove when 7.3 is not maintained anymore
+      spec = inspect.getargspec(method)
   else:
     spec = inspect.getfullargspec(method)
   # get arguments  except self and return_raw
@@ -432,7 +433,11 @@ if __name__ == "__main__":
     if isinstance(method_content, list):
       kwargs.update(method_content[1])
     function = get_api_method(endpoint, objname, command)
-    params = inspect.getargspec(function).args[1:-1]
+    try:
+      params = inspect.getfullargspec(function).args[1:-1]
+    except:
+      # Python2 compatibility, can be safely removed when 7.3 is not maintained anymore
+      params = inspect.getargspec(function).args[1:-1]
     if json_data is not None:
       kwargs.update(json.loads(json_data))
     for param in params:
